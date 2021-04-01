@@ -1,5 +1,5 @@
 # HajjManagement
-Hajj and Umrah Management Application 
+Hajj and Umrah Management Application develop using C#, ASP.Net MVC, AngularJS and LINQ. 
 
 Some of screen shot given below:
 
