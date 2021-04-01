@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="OtherCreateCtrl">
+    <h1 class="page-header">Other | Create</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="OtherForm" ng-submit="OtherForm.$valid && SaveOther()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Ref/Group Leader</label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="GroupLeader" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Name as x.Name for x in GroupLeaderList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectgroupLeader($item)"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Initial Name</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Other.InitialName" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x as x for x in InitialNameList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">First Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PhoneNmbr" ng-model="Other.FirstName" placeholder="First Name" />
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Middle Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="tel" class="form-control" ng-model="Other.MiddleName" placeholder="Middle Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Last Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Other.LastName" placeholder="Last Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport No</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PID" placeholder="Passport No" ng-model="Other.PassportNo" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Date Of Birth</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Other.DoB" />
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Issue Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Other.IssueDate" placeholder="Issue Date" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Date Of Expiry</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Other.DateOfExpiry" />
+                            </div>                                                   
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Purpose</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Other.Purpose" placeholder="Purpose" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Purchase From</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="PurchaseFrom" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in SupplierList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectSupplier($item)"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Purchase Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Other.PurchaseRate" placeholder="Purchase Rate" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Sell To</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Other.SellTo" placeholder="Sell To" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Selling Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Other.SellingRate" placeholder="Selling Amount" />
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Paid Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Other.PaidAmount" placeholder="Paid Amount"
+                                       ng-change="GetDueAmount(Other.PaidAmount)" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Due Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="font-weight:bold;font-size:20px">{{Due}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" ng-hide="Other.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" ng-show="Other.ID>0">
+                            <a ng-click="printer.printReport('/Hajj/Others/Report?id=' + Other.ID);" class="btn btn-danger pull-right" style="margin-right:10px">Print</a>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" ng-show="Other.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/Others/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/OtherControllerCreate.js"></script>
+

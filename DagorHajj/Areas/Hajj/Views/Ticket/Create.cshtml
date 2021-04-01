@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="TicketCreateCtrl">
+    <h1 class="page-header">Ticket | Create</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="TicketForm" ng-submit="TicketForm.$valid && SaveTicket()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Ref/Group Leader</label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="GroupLeader" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Name as x.Name for x in GroupLeaderList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectgroupLeader($item)"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Initial Name</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Ticket.InitialName" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x as x for x in InitialNameList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">First Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PhoneNmbr" ng-model="Ticket.FirstName" placeholder="First Name" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Middle Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="tel" class="form-control" ng-model="Ticket.MiddleName" placeholder="Middle Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Last Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Ticket.LastName" placeholder="Last Name" />
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport No</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PID" placeholder="Passport No" ng-model="Ticket.PassportNo" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Date Of Birth</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Ticket.DoB" />
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Issue Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Ticket.IssueDate" placeholder="Issue Date" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Date Of Expare</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Ticket.DateOfExpiry" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group" ng-repeat="x in ReapeatTimes">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Sector</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="x.Sector" name="Sector_{{$index}}" placeholder="Sector" style="text-transform:uppercase" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="x.Date" name="Date_{{$index}}" />
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pull-left" ng-hide="x.Status == true">
+                                <input type="button" class="btn btn-success" value="Add" name="addBtn_{{$index}}" ng-click="ClickedOnAdd(x)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Flight No</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PID" placeholder="Flight No" ng-model="Ticket.FlightNo" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Flight Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Ticket.FlightDate" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Carier</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Carier" placeholder="Carier" ng-model="Ticket.Carier" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Ticket no</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Ticket.TicketNo" placeholder="Ticket no" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Airlines PNR</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Ticket.AirlinesPNR" placeholder="Airlines PNR" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">GDS PNR</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Ticket.GdsPNR" placeholder="Gds PNR" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Purchase From</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="PurchaseFrom" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in SupplierList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectSupplier($item)"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Purchase Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Ticket.PurchaseRate" placeholder="Purchase Amount" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Sell To</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Ticket.SellTo" placeholder="Sell To" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Selling Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Ticket.SellingRate" placeholder="Selling Amount" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           
+                             <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Paid Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PaidAmount" placeholder="Paid Amount" ng-model="Ticket.PaidAmount"
+                                       ng-change="GetDueAmount(Ticket.PaidAmount)" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Due Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="font-weight:bold;font-size:20px">{{Due}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" ng-hide="Ticket.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" ng-show="Ticket.ID>0">
+                            <a ng-click="printer.printReport('/Hajj/Ticket/Report?id=' + Ticket.ID);" class="btn btn-danger pull-right" style="margin-right:10px">Print</a>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" ng-show="Ticket.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/Ticket/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/TicketCreateController.js"></script>
+

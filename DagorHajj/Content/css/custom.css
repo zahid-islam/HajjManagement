@@ -1,0 +1,126 @@
+﻿
+label {
+    text-align: left;
+}
+
+fieldset.area-border {
+    /*border: 1px groove #D3D3D3 !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;*/
+}
+
+legend.area-border {
+    /*width: inherit;
+    padding: 0 10px;
+    border-bottom: none;
+    font-size: 18px;
+    font-weight:500;*/
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+input.dynamic {
+    background-color: transparent;
+    border: 0px solid;
+    Height: auto;
+    width: 100%;
+    color: #707478;
+}
+
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+	 * we use height instead, but this forces the menu to always be this tall
+	 */
+* html .ui-autocomplete {
+    height: 100px;
+}
+
+.es-input {
+    background-color: white !important;
+    width: 100% !important;
+    border-width: 1px;
+}
+
+input.ng-invalid.ng-dirty, textarea.ng-invalid.ng-dirty, select.ng-invalid.ng-dirty {
+    background: #ffdedd !important;
+    border-color: #ff5b57 !important;
+    border: 1px solid #EED3D7;
+}
+
+input.ng-valid.ng-dirty, textarea.ng-valid.ng-dirty, select.ng-valid.ng-dirty {
+    background: #cee !important;
+    border-color: #00acac !important;
+    border: 1px solid #D6E9C6;
+}
+
+.validation-error, .validation-success {
+    color: #333 !important;
+}
+
+.validation-error {
+    background: #ffdedd !important;
+    border-color: #ff5b57 !important;
+}
+
+.validation-success {
+    background: #cee !important;
+    border-color: #00acac !important;
+}
+
+.validation-error:focus, .validation-success:focus {
+    color: #333 !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.3) !important;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.3) !important;
+}
+
+#typeHeadId > .dropdown-menu {
+    width: 100% !important;
+}
+
+input.search {
+    font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif, FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}

@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Cheque Management Report";
+    Layout = "~/Views/Shared/_ApplicationLayout.cshtml";
+}
+<style>
+    .table-condensed thead tr th:nth-child(6) {
+        color: black !important;
+    }
+</style>
+<div class="content" ng-controller="ChequeManagementController">
+    <span class="pull-right"><a href="#" class="btn btn-success m-r-5 m-b-5">Add New</a></span>
+    <h1 class="page-header">Cheque Management</h1>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-inverse">
+                <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+                <div class="panel-heading">
+                    <div class="panel-heading-btn"> <a href="javascript:void(0);" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> </div>
+                    <h4 class="panel-title"><strong>Cheque List</strong></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div clas-s="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <div class="form-group" style="margin-left:5px;">
+                                <input type="text" class="form-control" placeholder="Search" ng-change="searchFromList()" ng-model="searchText" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-responsive table-bordered table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>SN.</th>
+                                    <th>Payee Name</th>
+                                    <th>Cheque No</th>
+                                    <th>Cheque Date</th>
+                                    <th>Bank Name</th>
+                                    <th>Branch</th>                                    
+                                    <th style="color:black">Action</th>
+                                </tr>
+                                <tr ng-repeat="x in filteredCheques | filter:searchText" style="border: 1px solid black;" ng-init="SetGrandTotals(x);">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{x.GroupLeaderName}}</td>
+                                    <td>{{x.ChequeNo}}</td>
+                                    <td>{{x.ChequeDate}}</td>
+                                    <td>{{x.BankName}}</td>
+                                    <td>{{x.Branch}}</td>
+                                    <td><a class="btn btn-info btn-xs white" ng-click="ShowModalForCheckManagement(x);"><i class="fa fa-pencil"></i></a></td>
+                                </tr>
+
+                            </thead>
+                        </table>
+                    </div>
+                    <div>
+                        <div style="width:20%;margin-top:5px;">
+                            Show Items Per Page
+                            <select ng-model="itemsPerPage" ng-change="pageChanged()" ng-options="item for item in showItems"></select>
+                        </div>
+
+                        <div style="width:80%">
+                            <ul uib-pagination total-items="DataList.length" items-per-page="itemsPerPage" ng-change="pageChanged()" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="check-management">
+        <div class="modal-dialog">
+            <form action="" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Cheque Edit</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Status<span class="red"> </span></label>
+                                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+                                    <div class='input-group'>
+                                        <input ng-model="Payment.Status" class="form-control"
+                                               type="text"
+                                               empty-typeahead
+                                               name="SearchingPOId"
+                                               typeahead-on-select="SetStatus($item)"
+                                               autocomplete="off"
+                                               typeahead-editable="false"
+                                               uib-typeahead="x.Status as x.Status for x in StatusData | filter:{'Status':$viewValue}  | limitTo:10"
+                                               spellcheck="false"
+                                               typeahead-min-length="0" />
+
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Remarks</label>
+                                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                                    <input type="text" ng-model="Payment.Remarks" name="NewMrp" class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" name="updateCommand" ng-click="UpdateChequeManagementData();" class="btn btn-sm btn-primary" @*data-dismiss="modal"*@ value="Update">
+                        <input type="button" name="resetCommand" ng-click="resetForm()" class="btn btn-sm btn-primary" value="Reset">
+                        <input type="button" name="cancelCommand" class="btn btn-sm btn-danger" data-dismiss="modal" value="Cancel">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script src="~/Areas/Hajj/Scripts/ChequeManagementController.js"></script>
+
+
+
+
+
+
+
+
+

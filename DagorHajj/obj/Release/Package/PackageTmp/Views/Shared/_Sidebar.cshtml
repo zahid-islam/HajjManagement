@@ -1,0 +1,87 @@
+﻿@{
+    var area = ViewContext.RouteData.DataTokens.ContainsKey("area")
+        ? ViewContext.RouteData.DataTokens["area"].ToString()
+        : "";
+    var controllerName = ViewContext.RouteData.Values["controller"].ToString();
+    var actionName = ViewContext.RouteData.Values["action"].ToString();
+
+    var userId = Convert.ToInt32(User.Identity.Name);
+    var user = new DagorHajj.DAL.UnitOfWork().UserRepository.GetById(userId);
+    var allowedMenus = DagorHajj.Utility.Helper.GetMenuList(userId);
+}
+<!--SIDEBAR START-->
+
+<div id="sidebar" class="sidebar no-print">
+    <div data-scrollbar="true" data-height="100%">
+        <ul class="nav">
+            @if (allowedMenus.Contains("CompanyProfile") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "CompanyProfile" ? "class=active" : "")> <a href="@Url.Action("Index", "CompanyProfile", new { Area = "Hajj" })"><i class="fa fa-list"></i> Company Profile</a></li>
+            }
+            @if (allowedMenus.Contains("GroupLeader") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "GroupLeader" ? "class=active" : "")> <a href="@Url.Action("Index", "GroupLeader", new { Area = "Hajj" })"><i class="fa fa-list"></i> Group Leader</a></li>
+            }
+            @if (allowedMenus.Contains("Hajji") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "Hajji" ? "class=active" : "")> <a href="@Url.Action("Index", "Hajji", new { Area = "Hajj" })"><i class="fa fa-list"></i> Hajj</a></li>
+            }  
+            @if (allowedMenus.Contains("Umrah") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "Umrah" ? "class=active" : "")> <a href="@Url.Action("Index", "Umrah", new { Area = "Hajj" })"><i class="fa fa-list"></i> Umrah</a></li>
+            }
+            @if (allowedMenus.Contains("Ticket") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "Ticket" ? "class=active" : "")> <a href="@Url.Action("Index", "Ticket", new {Area = "Hajj"})"><i class="fa fa-list"></i> Ticket</a></li>
+            }
+            @if (allowedMenus.Contains("Others") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "Others" ? "class=active" : "")> <a href="@Url.Action("Index", "Others", new { Area = "Hajj" })"><i class="fa fa-list"></i> Other</a></li>
+            }
+            @*@if (allowedMenus.Contains("Booking") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "Booking" ? "class = active" : "")><a href="@Url.Action("Index", "Booking", new { Area = "Hajj"})"><i class="fa fa-list"></i> Booking</a></li>
+            }*@
+            @if (allowedMenus.Contains("Payment") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "Payment" ? "class = active" : "")><a href="@Url.Action("Index", "Payment", new { Area = "Hajj"})"><i class="fa fa-list"></i> Payment Collection</a></li>
+            }
+            @if (allowedMenus.Contains("SupplierPayment") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "SupplierPayment" ? "class = active" : "")><a href="@Url.Action("Index", "SupplierPayment", new { Area = "Hajj"})"><i class="fa fa-list"></i> Supplier Payment </a></li>
+            }
+            @if (allowedMenus.Contains("ChequeManagement") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "ChequeManagement" ? "class=active" : "")> <a href="@Url.Action("Index", "ChequeManagement", new { Area = "Hajj" })"><i class="fa fa-list"></i> Cheque Management</a></li>
+            }
+            @if (allowedMenus.Contains("MuharramRelation") || user.RoleId <= 2)
+            {
+            <li @(controllerName == "MuharramRelation" ? "class=active" : "")> <a href="@Url.Action("Create", "MuharramRelation", new { Area = "Hajj" })"><i class="fa fa-list"></i> Muharram Relation</a></li>
+            }
+            @if (allowedMenus.Contains("Supplier") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "Supplier" ? "class=active" : "")><a href="@Url.Action("Index", "Supplier", new { Area = "Hajj" })"><i class="fa fa-list"></i> Supplier </a></li>
+            }
+            @if (allowedMenus.Contains("User") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "User" ? "class=active" : "")> <a href="@Url.Action("Index", "User", new { Area = "Hajj" })"><i class="fa fa-list"></i> User Manager</a></li>
+            }
+            @if (allowedMenus.Contains("UserAdmin") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "UserAdmin" ? "class=active" : "")> <a href="@Url.Action("Index", "UserAdmin", new { Area = "Hajj" })"><i class="fa fa-list"></i> User Privilege</a></li>
+            }
+            @if (allowedMenus.Contains("Reports") || user.RoleId <= 2)
+            {
+                <li @(controllerName == "Reports" ? "class=active" : "")> <a href="@Url.Action("Index", "Reports", new { Area = "Hajj" })"> <i class="fa fa-list"></i> <span>Reports </span> </a></li>
+            }
+            @*<li @(controllerName == "HajjiReference" ? "class = active" : "")><a href="@Url.Action("Index", "HajjiReference", new { Area = "Hajj"})"><i class="fa fa-list"></i> Hajj Reference</a></li>*@
+
+            @*<li @(controllerName == "Settings" ? "class=active" : "")><a href="@Url.Action("Create", "Settings", new { Area = "Hajj" })"><i class="fa fa-list"></i> Setting </a></li>*@
+            
+            @*<li @(controllerName == "Role" ? "class=active" : "")> <a href="@Url.Action("Index", "Role", new {Area = "Hajj"})"><i class="fa fa-list"></i> Role</a></li>*@
+        </ul>
+    </div>
+</div>
+<div class="sidebar-bg"></div>
+
+<!--SIDEBAR END-->

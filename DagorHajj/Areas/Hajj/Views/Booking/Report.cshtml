@@ -1,0 +1,232 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" ng-app="moneyReceipt" ng-cloak>
+<head lang="en">
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/animate.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/style.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/style-responsive.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/default.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/report.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/print.css" rel="stylesheet" />
+    <script src="/Content/assets/plugins/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+
+    @*ANGULAR JS*@
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-loading-bar.js"></script>
+    <script src="~/scripts/angular-barcode.js"></script>
+
+    <script type="text/javascript">
+        var moneyReceiptApp = angular.module("moneyReceipt", ["angular-loading-bar", "io-barcode"]);
+    </script>
+
+    <style type="text/css">
+        .container {
+            width: 100%;
+        }
+
+        table thead tr th {
+            text-align: center;
+        }
+
+
+        #table1 th {
+            border: 1px solid black;
+        }
+
+        #table1 td {
+            border: 1px solid black;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid blue;
+            border-right: 16px solid green;
+            border-bottom: 16px solid red;
+            border-left: 16px solid pink;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @@-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @@-keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        td {
+            padding-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body ng-controller="BookingMoneyReceiptController">
+    @{
+        var companyInfo = DagorHajj.Utility.Helper.GetCompanyInfo(Convert.ToInt32(User.Identity.Name));
+        var userInfo = DagorHajj.Utility.Helper.GetUserInfo(Convert.ToInt32(User.Identity.Name));
+        var showHeaderInfo = ViewBag.ShowHeaderInfo == null ? true : Convert.ToBoolean(ViewBag.ShowHeaderInfo);
+        var headerHeight = ViewBag.HeaderHeight == null ? 0 : Convert.ToInt32(ViewBag.HeaderHeight);
+    }
+    <div class="portrait">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                    @*<img style="height:80px;" src="@Url.Content(" ~/Content/images/report-logo.jpeg")" alt="Company Logo" />*@
+                    <img style="height:80px;" src="~/UploadedFiles/{{BookingReceipt.ImageAttach}}" alt="Company Logo" />
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
+                    <p style="font-family:'Times New Roman'; font-weight:bold;font-size:20px;margin-bottom:5px;">@companyInfo.ConpanyName</p>
+                    <p style="font-size:15px;line-height:10px;">@companyInfo.Address</p>
+                    <p style="font-size:15px;line-height:10px;"> @companyInfo.ContactNo</p>
+                </div>
+            </div>
+            <div style="height:450px; border-bottom:1px black dashed">
+                <h3 class="print_title" style="margin-top:0;">Money Receipt</h3>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <table style="margin-bottom:10px; width:100%; float:left;">
+                            <tbody>
+                                <tr style="border-bottom:1px black solid;">
+                                    <td style="width:10%;">MR No.</td>
+                                    <td style="width:35%;">{{BookingReceipt.MrNo}}</td>
+                                    <td style="width:10%;">Date & Time</td>
+                                    <td style="width:25%;">{{BookingReceipt.Date}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;padding-top:10px;">Received with thanks from </td>
+                                    <td style="border-bottom: 1px black dotted;padding-top:10px;" colspan="3">{{BookingReceipt.GroupLeaderName}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">On account of</td>
+                                    <td style="border-bottom: 1px black dotted;" colspan="3">{{BookingReceipt.AccountName}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:25%;">Cash Received as Advnce the amount of taka</td>
+                                    <td style="border-bottom: 1px black dotted;" colspan="3">{{BookingReceipt.Amount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <table style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <td style="width:50%; text-align:left;"><strong style="border-top: 2px solid">Received By</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:50%; text-align:left;">@userInfo.Name</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                    @*<img style="height:80px;" src="@Url.Content(" ~/Content/images/report-logo.jpeg")" alt="Company Logo" />*@
+                    <img style="height:80px;" src="~/UploadedFiles/{{BookingReceipt.ImageAttach}}" alt="Company Logo" />
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
+                    <p style="font-family:'Times New Roman'; font-weight:bold;font-size:20px;margin-bottom:5px;">@companyInfo.ConpanyName</p>
+                    <p style="font-size:15px;line-height:10px;">@companyInfo.Address</p>
+                    <p style="font-size:15px;line-height:10px;"> @companyInfo.ContactNo</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="print_title" style="margin-top:0;">Money Receipt</h3>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <table style="margin-bottom:10px; width:100%; float:left;">
+                            <tbody>
+                                <tr style="border-bottom:1px black solid;">
+                                    <td style="width:10%;">MR No.</td>
+                                    <td style="width:35%;">{{BookingReceipt.MrNo}}</td>
+                                    <td style="width:10%;">Date & Time</td>
+                                    <td style="width:25%;">{{BookingReceipt.Date}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;padding-top:10px;">Received with thanks from </td>
+                                    <td style="border-bottom: 1px black dotted;padding-top:10px;" colspan="3">{{BookingReceipt.GroupLeaderName}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:20%;">On account of</td>
+                                    <td style="border-bottom: 1px black dotted;" colspan="3">{{BookingReceipt.AccountName}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:25%;">Cash Received as Advnce the amount of taka</td>
+                                    <td style="border-bottom: 1px black dotted;" colspan="3">{{BookingReceipt.Amount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                   
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <table style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <td style="width:50%; text-align:left;"><strong style="border-top: 2px solid">Received By</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:50%; text-align:left;">@userInfo.Name</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="row no-print">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> </div>
+                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2"> <a href="javascript:;" onclick="window.print()" class="btn btn-success pull-right">Print</a> </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Areas/Hajj/Scripts/BookingMoneyReceiptController.js"></script>
+    <script>
+        moneyReceiptApp.value("routeData", { Id: @Html.Raw(ViewBag.Id)});
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#loader").hide();
+        });
+    </script>
+</body>
+</html>

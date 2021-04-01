@@ -1,0 +1,182 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" ng-app="gamkaPackage" ng-cloak>
+<head lang="en">
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/animate.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/style.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/style-responsive.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/default.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/print.css" rel="stylesheet" />
+    <script src="/Content/assets/plugins/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-loading-bar.js"></script>
+
+    <script type="text/javascript">
+        var gmakaApp = angular.module("gamkaPackage", ["angular-loading-bar"]);
+
+    </script>
+
+    <style type="text/css">
+        .container {
+            width: 100%;
+        }
+
+        html, body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .table thead tr th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-controller="ReportHajjCtrl">
+    <div class="portrait">
+        <div class="container">
+
+
+            @{
+                ViewBag.Title = "Hajj Agreement";
+            }
+
+            <center><h5><strong>হজ্বযাত্রী ও হজ্ব এজেন্সীর মধ্যে সম্পাদিত</strong></h5></center>
+            <center><h5><strong>চুক্তিপত্র</strong></h5></center>
+            <center><h6><strong>(চুক্তিপত্রের এই www.hajj.gov.bd - এর ফরমসমূহ লিংক হতে ডাউনলোড করা যাবে)</strong></h6></center>
+
+            <div class="row">
+                <table style="margin:0; width:100%;">
+                    <tr>
+                        <td>প্রথম পক্ষ</td>
+                    </tr>
+                    <tr>
+                        <td>হজ্ব এজেন্সীর নামঃ <span><b>{{CompanyInfo.ConpanyName}}</b></span></td>
+                        <td>হজ্ব লাইসেন্স নম্বরঃ <span><b>{{CompanyInfo.LicenseNo}}</b></span></td>
+                    </tr>
+                    <tr>
+                        <td>স্বত্বাধিকারী/হজ্ব প্রতিনিধির নামঃ <span><b>{{CompanyInfo.OwnersName}}</b></span></td>
+                        <td>পদবিঃ <span><b>{{CompanyInfo.Designation}}</b></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>দ্বিতীয় পক্ষ</td>
+                    </tr>
+                    <tr>
+                        <td>হজ্বযাত্রীর নামঃ <span><b>{{HajjInfo.FullName}}</b></span></td>
+                    </tr>
+                    <tr>
+                        <td>প্রাক-নিবন্ধন নম্বরঃ <span><b>{{HajjInfo.PreRegistratioNo}}</b></span></td>
+                        <td>ট্রাকিং নম্বরঃ <span><b>{{HajjInfo.TrackingNo}}</b></span></td>
+                    </tr>
+                    <tr>
+                        <td>প্যাকেজ নামঃ <span><b>{{CompanyInfo.PackageName}}</b></span></td>
+                        <td>প্যাকেজ মূল্যঃ <span><b>{{CompanyInfo.PackageRate}}</b></span></td>
+                    </tr>
+                </table>
+                <div class="clearfix">&nbsp;</div>
+                <h6><strong>আমরা উভয় পক্ষ স্বেচ্ছায়, স্বজ্ঞানে নিন্মবর্নিত শর্তে প্রদেয় সুবিধাদি প্রদানে ও গ্রহনে সম্মত হয়ে পরস্পর চুক্তিবদ্ধ হলামঃ</strong></h6>
+                <p>
+                    ১। ১৪...... হিজরি (২০......খ্রিঃ) সনে হজ্ব পালনে নিবন্ধনের জন্য ২য় পক্ষ তালিকাভুক্ত হওয়ায় ১ম পক্ষ নিবন্ধনসহ ২য় পক্ষের <br />
+                    হজ্ব পালনের দায়িত্ব গ্রহণ করল। <br />
+                    ২। 	সরকার ঘোষিত বেসরকারি প্যাকেজ মূল্যের বাহিরে আবাসন/সেবাঃ <br />
+                    (ক) মক্কার প্রথম আবাসন: হারাম শরীফ হতে <b>৬০০</b> মিটার দূরে, এক রুমে <b>৪-৫</b> জনের হবে; <br />
+                    (খ) মক্কার দ্বিতীয় আবাসন (যদি থাকে): হারাম শরীফ হতে <b>৩ কি. মি.</b> মিটার দূরে, এক রুমে <b>৪-৫</b> জনের হবে; <br />
+                    (গ) মদীনার আবাসন: হরাম শরীফ হতে <b>৩০০</b> মিটার দূরে, এক রুমে <b>৪-৫</b> জনের হবে; <br />
+                    (ঘ) আহার অন্তর্ভূক্ত/ অন্তর্ভূক্ত নয়; <br />
+                    (ঙ) মিনায় অবস্থানকালে আহার অন্তর্ভূক্ত/ অন্তর্ভূক্ত নয়; <br />
+                    (চ) কুরবানী অন্তর্ভূক্ত / অন্তর্ভূক্ত নয়। <br />
+                    ৩। 	২য় পক্ষকে ........................................................................ এয়ারলাইন্সযোগে পরিবহন করা হবে। <br />
+                    ৪। 	১ম পক্ষ অবশ্যই মোয়াল্লেমের সাথে হজ্ব প্যাকেজে বর্ণিত নূন্যতম অতিরিক্ত সার্ভিস ক্রয় করবে এবং প্রাতিটি হজ্বযাত্রী <br />
+                    উক্ত সেবাসমূহ পাবে। <br />
+                    ৫।	 ১ম পক্ষ প্রতি ৪৫ জন হজ্বযত্রীর জন্য একজন দক্ষ হজ্বগাইড নিয়োগ করবে। <br />
+                    ৬। 	১ম পক্ষ ২য় পক্ষের কুরবানী নিশ্চিত করার জন্য সৌদি আরবে ইসলামী ডেভেলপমেন্ট ব্যাকে অর্থ জমা করে কূপন  <br />
+                    ক্রয়ের প্রয়োজনীয় ব্যবস্থা গ্রহন করবে। <br />
+                    ৭। 	১ম পক্ষ দ্বিতীয় পক্ষকে সরকার ঘোষিত হজ্ব প্যাকেজ ও তাদের নিজস্ব প্যাকেজ বর্ণনা করছে। ২য় পক্ষ তা পূর্নাঙ্গভাবে <br />
+                    বুঝে প্যাকেজে বর্ণিত সুবিধাদির অতিরিক্ত দাবি না করার বিষয়ে সম্মত হলো। <br />
+                    ৮। 	উভয় পক্ষ বাংলাদেশ ও সৌদি আরবের হজ্ব ও এতদসংশ্লিষ্ট আইন কানুন, বিধি-বিধান, নির্দেশিকা  ইত্যাদি মেনে চলতে <br />
+                    বাধ্য থাকবে।
+                </p>
+                <div class="clearfix">&nbsp;</div>
+                <table style="margin:0; width:100%;">
+                    <tr>
+                        <td>প্রথম পক্ষের স্বাক্ষর ও তারিখ (সীলসহ)</td>
+                        <td>দ্বিতীয় পক্ষের স্বাক্ষর ও তারিখ (সীলসহ)</td>
+                    </tr>
+                    <tr>
+                        <td>মোবাইল নং</td>
+                        <td>মোবাইল নং</td>
+                    </tr>
+                </table>
+
+                <div class="clearfix">&nbsp;</div>
+                <p><u>স্বাক্ষীরদের স্বাক্ষর, নাম ও জাতীয় পরিচয়পত্র নম্বরঃ</u></p>
+                <table style="margin:0; width:100%;">
+                    <tr>
+                        <td>১।</td>
+                        <td>১।</td>
+                    </tr>
+                    <tr>
+                        <td>স্বাক্ষর :</td>
+                        <td>স্বাক্ষর :</td>
+                    </tr>
+                    <tr>
+                        <td>নাম :</td>
+                        <td>নাম :</td>
+                    </tr>
+                    <tr>
+                        <td>NID নম্বর :</td>
+                        <td>NID নম্বর :</td>
+                    </tr>
+                    <tr>
+                        <td>১।</td>
+                        <td>১।</td>
+                    </tr>
+                    <tr>
+                        <td>স্বাক্ষর :</td>
+                        <td>স্বাক্ষর :</td>
+                    </tr>
+                    <tr>
+                        <td>নাম :</td>
+                        <td>নাম :</td>
+                    </tr>
+                    <tr>
+                        <td>NID নম্বর :</td>
+                        <td>NID নম্বর :</td>
+                    </tr>
+                </table>
+                <div class="clearfix">&nbsp;</div>
+                <p>
+                    চুক্তির মূল কপি হজ্বযাত্রীর নিকট, একটি অনুলিপি ঢাকাস্থ হজ্ব অফিসে এবং অন্যটি হজ্ব এজেন্সীর নিকট সংরক্ষিত থাকবে। <br />
+                    হজ্বযাত্রীদের সাথে তাদের সম্পাদিত চুক্তির অনুলিপি ধর্ম বিষয়ক মন্ত্রণালয়ের প্রেরণ করবে।
+                </p>
+                <center><h6><strong>পিলগ্রিম আইডি নম্বর  (পিলগ্রিম আইডি প্রাপ্তির পর পূরনীয়).</strong></h6></center>
+            </div>
+
+            <div class="row no-print">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> </div>
+                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2"> <a href="javascript:;" onclick="window.print()" class="btn btn-success pull-right">Print</a> </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+    </div>
+    <script src="~/Areas/Hajj/Scripts/ReportHajjCtrl.js"></script>
+    <script>
+        gmakaApp.value("routeData");
+    </script>
+</body>
+</html>
+

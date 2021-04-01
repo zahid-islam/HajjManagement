@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Muharram Information | New";
+    Layout = "~/Views/Shared/_ApplicationLayout.cshtml";
+}
+<link href="~/Content/assets/plugins/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet" />
+<link href="~/Content/css/custom.css" rel="stylesheet" />
+<div class="content" ng-controller="MuharramController">
+    <h5>Muharram Relation</h5>
+    <div class="clearfix">&nbsp;</div>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+    <form class="form-horizontal" ng-submit="Muharram.$valid && SaveMuharram()" name="Muharram" ng-class="{'submitted': submitted}" novalidate>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-2"><label class="control-label">Relation Type</label><span class="red"> *</span></div>
+                    <div class="col-sm-4">
+                        <input ng-model="MuharramType.RelationType" type="text" name="MuharramType" class="form-control" ng-keydown="$event.keyCode === 13 && changeFocus('MuharramType')" />
+                    </div>
+                    <div class="col-sm-6" style="margin-top:-18px;">
+                        <div class="clearfix">&nbsp;</div>
+                        <input ng-show="ActionStatus=='Add'" type="button" class="btn btn-primary" value="Add" ng-click="submitted = true;SaveMuharram();" />
+                        <input ng-show="ActionStatus=='Edit'" type="button" class="btn btn-info" value="Edit" ng-click="submitted = true;UpdateMuharram(x);" />
+                        <input ng-show="ActionStatus=='Edit'" type="button" class="btn btn-danger" value="Cancel" ng-click="CancelChildUpdate()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix">&nbsp;</div>
+        <div class="panel">
+            <div class="panel-body">
+                <fieldset class="area-border">
+                    <legend class="area-border">{{Title}}</legend>
+                    <div class="row">
+                        <div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>S/N</td>
+                                            <td>Name</td>
+                                            <td>Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="x in MuharramTypeList.Muharrams">
+                                            <td ng-bind="$index+1"></td>
+                                            <td ng-bind="x.RelationType"></td>
+                                            <td style="width:105px;">
+                                                <a class="btn btn-info btn-xs white" href="javascript:void(0);" ng-click="SetUpdateData(x)">
+                                                    <i class="fa fa-pencil" style="width:37px;"> Edit</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+    </form>
+   
+    <!--REPORT SECTION-->
+
+</div>
+<div class="clearfix">&nbsp;</div>
+
+@section scripts {
+    <script src="~/Areas/Hajj/Scripts/MuharramController.js"></script>
+}
+
+
+
+

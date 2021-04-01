@@ -1,0 +1,434 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="UmrahCreateCtrl">
+    <h1 class="page-header">Umrah | Create</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="UmrahForm" ng-submit="UmrahForm.$valid && SaveUmrahData()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Umrah ID</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.UmrahID" ng-init="Umrah.UmrahID = '@ViewBag.count'" placeholder="Umrah ID" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Ref/Group Leader<span class="red"> *</span></label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="GroupLeader" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Name as x.Name for x in GroupLeaderList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectgroupLeader($item)"
+                                           typeahead-min-length="0" name="HajjiReferences" autocomplete="off"
+                                           ng-class="{'validation-error': UmrahForm.HajjiReferences.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Initial Name<span class="red"> *</span></label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" name="InitialName" ng-model="Umrah.InitialName" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x as x for x in InitialNameList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off"
+                                           ng-class="{'validation-error': UmrahForm.InitialName.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">First Name<span class="red"> *</span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="FirstName" placeholder="First Name" ng-model="Umrah.FirstName"
+                                       ng-class="{'validation-error': UmrahForm.FirstName.$invalid && submitted}"
+                                       ng-required="(Umrah.LastName==null || Umrah.LastName == '') && (Umrah.FirstName==null || Umrah.FirstName== '')" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Middle Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.MiddleName" name="MiddleName" placeholder="Middle Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Last Name <span class="red"> *</span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="LastName" placeholder="Last Name" ng-model="Umrah.LastName"
+                                       ng-class="{'validation-error': UmrahForm.LastName.$invalid && submitted}"
+                                       ng-required="(Umrah.LastName==null || Umrah.LastName == '') && (Umrah.FirstName==null || Umrah.FirstName== '')" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Date Of Birth</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Umrah.DoB" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Place Of Birth</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Umrah.PlaceOfBirth" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.name as x.name for x in DistrictList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Father Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.FatherName" placeholder="Father Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Mother Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.MotherName" placeholder="Mother Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contact NO</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PhoneNmbr" ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/" ng-model="Umrah.ContactNo" placeholder="Contact No" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">National ID</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="NID" ng-model="Umrah.NID" ng-pattern="/(^[0-9]{1}((\d){9}|(\d){12}|(\d){16}))$/" placeholder="National ID" />
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+                            <div class="alert-warning col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left" ng-show="UmrahForm.NID.$error.pattern">
+                                <p style="color:red"> Valid National Id Required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+                            <div class="alert-warning col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left" ng-show="UmrahForm.PhoneNmbr.$error.pattern">
+                                <p style="color:red">Valid phone number required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Spouse Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.SpouseName" placeholder="Spouse Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Spouse Contact NO</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.SpouseContactNo" placeholder="Spouse Contact No" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Muharram Name<span class="red" ng-hide="Umrah.InitialName == 'Mr' || Umrah.InitialName == 'Mastr' || Umrah.InitialName == null || Umrah.InitialName.length  == 0 "> *</span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+                                <input type="text" class="form-control" ng-model="Umrah.MuharramName" ng-show="Umrah.InitialName == 'Mr' || Umrah.InitialName == 'Mastr' || Umrah.InitialName == null || Umrah.InitialName.length  == 0" placeholder="Muharram Name" />
+
+                                <input type="text" class="form-control" name="MuharramName" ng-model="Umrah.MuharramName" placeholder="Muharram Name"
+                                       ng-hide="Umrah.InitialName == 'Mr' || Umrah.InitialName == 'Mastr' || Umrah.InitialName == null || Umrah.InitialName.length  == 0 " ng-class="{'validation-error': UmrahForm.MuharramName.$invalid && submitted}"
+                                       ng-required="Umrah.InitialName == 'Mrs' || Umrah.InitialName == 'Miss'" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Relation With Muharram</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="RelationWithMaharram" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.RelationType as x.RelationType for x in MuharramRelationList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectMuharramStatus($item)"
+                                           typeahead-min-length="0" name="RelationWithMaharram" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="font-size:15px;font-weight:bold">Present Address</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">District</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Umrah.District" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.name as x.name for x in DistrictList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Thana</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Thana" ng-model="Umrah.Thana" placeholder="Thana" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Office</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostOffice" ng-model="Umrah.PostOffice" placeholder="Post Office" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Code</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostCode" ng-model="Umrah.PostCode" placeholder="Post Code" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Address</label>
+                            <div class="control-label col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PresentAddress" ng-model="Umrah.PresentAddress" placeholder="Present Address" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="font-size:15px;font-weight:bold">Permanent Address</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <label style="background-color:lightgreen;">
+                                    <input type="checkbox" ng-model="chechBoxStatus" ng-click="GetPermanentAddress()" />
+                                    Tick if Present Address And Permanent Address are same
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">District</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Umrah.PermanentDistrict" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.name as x.name for x in DistrictList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Thana</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Thana" ng-model="Umrah.PermanentThana" placeholder="Thana" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Office</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostOffice" ng-model="Umrah.PermanentPostOffice" placeholder="Post Office" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Code</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostCode" ng-model="Umrah.PermanentPostCode" placeholder="Post Code" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Address</label>
+                            <div class="control-label col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PermanentAddress" ng-model="Umrah.PermanentAddress" placeholder="Permanent Address" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Departure Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Umrah.DepartureDate" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Flight Arrival Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Umrah.FlightArrivalDate" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport No</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="FullName" ng-model="Umrah.PassportNo" placeholder="Passport No" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Place Of Passport Issue</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <textarea data-parsley-range="[1,200]" class="form-control" rows="2" cols="30" placeholder="Place of Pasport Issue"
+                                          ng-model="Umrah.PlaceOfPassportIssue"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport Issue Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" ng-model="Umrah.PassportIssueDate" class="form-control">
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport Expiry Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" ng-model="Umrah.PassportExpiryDate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Last Umrah Year</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.LastUmrahYear" placeholder="Last Umrah Year" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Satus</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="StatusTittle" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Title as x.Title for x in UmrahStatusList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectUmrahStatus($item)"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contract Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.ContractAmount" placeholder="Contract Amount" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Purchase From</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Umrah.PurchaseFrom" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in SupplierList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectSupplier($item)"
+                                           typeahead-min-length="0" name="PurchaseFrom" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Purchase Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Umrah.PurchaseAmount" placeholder="Contract Amount" />
+                            </div>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="passportFile" ng-model="Umrah.InitialAttachment" name="files" accept="image/*"
+                                           onchange="angular.element(this).scope().SelectPassportFile(this.files), readURL(this);" />
+                                </span>
+                            </div>
+                            <span ng-show="Umrah.PassportAttach != null"><a class="btn btn-default" target="_blank" style="color:green" href="~/UploadedFiles/{{Umrah.PassportAttach}}">{{Umrah.PassportAttach}}</a></span>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">File Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="file" name="files" ng-model="Umrah.InitialAttachment" accept="image/*"
+                                           onchange="angular.element(this).scope().SelectFile(this.files), readURL(this);" />
+                                </span>
+                            </div>
+                            <span ng-show="Umrah.NIDAttach != null"><a class="btn btn-default" style="color:green" target="_blank" href="~/UploadedFiles/{{Umrah.NIDAttach}}">{{Umrah.NIDAttach}}</a></span>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Image Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="imageFile" name="files" ng-model="Umrah.InitialAttachment" accept="image/*"
+                                           onchange="angular.element(this).scope().selectImageFile(this.files), readURL(this);" />
+                                </span>
+                            </div>
+                            <span ng-show="Umrah.ImageAttach != null"><a class="btn btn-default" style="color:green" target="_blank" href="~/UploadedFiles/{{Umrah.ImageAttach}}">{{Umrah.ImageAttach}}</a></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                            <a class="btn btn-success pull-right" ng-href="/Hajj/Payment/Create?umrahId={{Umrah.ID}}">Collection</a>
+                            @*&groupLeaderId={{Hajji.GroupLeaderID}}*@
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" ng-hide="Umrah.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" ng-show="Umrah.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/Umrah/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/UmrahCreateController.js"></script>

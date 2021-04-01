@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ApplicationLayout.cshtml";
+}
+
+<div class="content" ng-controller="SupplierListController">
+    <span class="pull-right"><a href="/Hajj/Supplier/Create" class="btn btn-success m-r-5 m-b-5">Add New</a></span>
+    <h1 class="page-header">Suppliers</h1>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-inverse">
+                <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+                <div class="panel-heading">
+                    <div class="panel-heading-btn"> <a href="javascript:void(0);" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> </div>
+                    <h4 class="panel-title"><strong>Supplier List</strong></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <div class="form-group" style="margin-left:5px;">
+                                <input type="text" class="form-control" placeholder="Search" ng-change="searchFromList()" ng-model="searchText" />
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <td> SR # </td>
+                                    <td> Company Name </td>
+                                    <td> Contact Person </td>
+                                    <td> Mobile  </td>                                    
+                                    <td> Address </td>
+                                    <td> Action  </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in filteredSuppliers | filter:searchText">
+                                    <td ng-bind="$index+1"> </td>
+                                    <td ng-bind="x.SupplierName"> </td>
+                                    <td ng-bind="x.ContactPerson"> </td>
+                                    <td ng-bind="x.MobileNumber"> </td>
+                                    <td ng-bind="x.PresentAddress"> </td>
+                                    <td>
+                                        <a class="btn btn-info btn-xs white" href="/Hajj/Supplier/Edit?Id={{x.Id}}"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-success btn-xs white" ng-click="(printer.printReport('/Hajj/Supplier/Report?id=' + x.Id))"><i class="fa fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <div style="width:20%;margin-top:5px;">
+                            Show Items Per Page
+                            <select ng-model="itemsPerPage" ng-change="pageChanged()" ng-options="item for item in showItems"></select>
+                        </div>
+                        <div style="width:80%">
+                            <ul uib-pagination total-items="DataList.length" items-per-page="itemsPerPage" ng-change="pageChanged()" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Areas/Hajj/Scripts/SupplierListController.js"></script>

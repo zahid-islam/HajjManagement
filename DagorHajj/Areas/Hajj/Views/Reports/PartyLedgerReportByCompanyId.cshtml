@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Party Ledger Report";
+}
+<style>
+    hr {
+        margin: 0px;
+    }
+    
+</style>
+
+<center><h6 class="print_title shadow-header" style="text-align:center; margin-top:10px;">Date Wise Payments</h6></center>
+@*<div class="clearfix">&nbsp;</div>*@
+<div class="row" ng-controller="PartyLedgerReportByCompanyIdController">
+    @*<div class="loader" id="loader2"></div>*@
+    <div id="loader2" ng-show="loading">
+        <img src="~/Content/images/loading.gif" />
+    </div>
+    <center class="shadow-header"><h4 style="text-align:center; margin-top:10px;">From: {{date.fromDate}}  &nbsp;    To: {{date.toDate}} </h4></center>
+
+    <div style="margin-top: 10px;" class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+        <table class="table table-responsive table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>SN.</th>
+                    <th>Party Name</th>
+                    <th>Date</th>
+                    <th>Payment For</th>
+                    <th>Amount</th>
+                </tr>
+                <tr ng-repeat="x in PartyLedger" style="border: 1px solid black;" ng-init="SetGrandTotals(x);">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.Name}}</td>
+                    <td>{{x.PaymentDate}}</td>
+                    <td>{{x.PaymentFor}}</td>
+                    <td align="right">{{x.Amount}}</td>
+                </tr>
+                <tr>
+                    <td align="right" colspan="4">Total</td>
+                    <td align="right">{{Total}}</td>
+                </tr>
+                
+            </thead>
+        </table>
+
+
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/PartyLedgerReportByCompanyIdController.js"></script>
+
+}
+

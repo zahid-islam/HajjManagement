@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="BookingCreateCtrl">
+    <h1 class="page-header">hajji Booking And Payment Status | Create</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="BookingForm" ng-submit="BookingForm.$valid && SaveBooking()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Payment For<span class="red"> *</span></label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Booking.PaymentFor" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.type as x.type for x in PaymentForList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" name="PaymentFor" autocomplete="off"
+                                           ng-class="{'validation-error': BookingForm.PaymentFor.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Group Leader<span class="red"> *</span></label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="GroupLeader" empty-typeahed typeahead-editable="true"
+                                           typeahead-on-select="SelectGroupLeader($item)"
+                                           uib-typeahead="x.Name as x.Name for x in GroupLeaderList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" name="GroupLeader" autocomplete="off"
+                                           ng-class="{'validation-error': BookingForm.GroupLeader.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Hajj For Year</label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Booking.HajjYear" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Year as x.Year for x in HajjYearList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12" ng-show="Booking.PaymentFor == 'Hajji'||Booking.PaymentFor == null">Hajji Id Ref<span class="red"> *</span></label>
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12" ng-show="Booking.PaymentFor == 'Umrah'">Umrah Id Ref<span class="red"> *</span></label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="HajjiReference" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.hajjiId as x.hajjiId for x in HajjiReferenceList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectHajjiRef($item)"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off"
+                                           ng-class="{'validation-error': BookingForm.HajjiReference.$invalid && submitted}" required />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Booking Date<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="date" ng-model="Booking.BookingDate" class="form-control" name="BookingDate"
+                                       ng-class="{'validation-error': BookingForm.BookingDate.$invalid && submitted}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Payment Type<span class="red"> *</span></label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Booking.PaymentType" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.type as x.type for x in paymenttypes | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" name="PaymentType" autocomplete="off"
+                                           ng-class="{'validation-error': BookingForm.PaymentType.$invalid && submitted}" required />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="Booking.PaymentType == 'Cheque'">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Cheque No<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Booking.ChequeNo" placeholder="Cheque No" name="ChequeNo"
+                                       ng-class="{'validation-error': BookingForm.ChequeNo.$invalid && submitted}" ng-required="Booking.PaymentType == 'Cheque'" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="Booking.PaymentType == 'Cheque'">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Cheque Date<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="date" ng-model="Booking.ChequeDate" class="form-control" name="ChequeDate"
+                                       ng-class="{'validation-error': BookingForm.ChequeDate.$invalid && submitted}" ng-required="Booking.PaymentType == 'Cheque'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="Booking.PaymentType == 'Cheque'">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Bank Name<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Booking.BankName" placeholder="Bank Name" name="BankName"
+                                       ng-class="{'validation-error': BookingForm.BankName.$invalid && submitted}" ng-required="Booking.PaymentType == 'Cheque'" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="Booking.PaymentType == 'Cheque'">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Branch<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Booking.Branch" placeholder="Branch" name="Branch"
+                                       ng-class="{'validation-error': BookingForm.Branch.$invalid && submitted}" ng-required="Booking.PaymentType == 'Cheque'" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Paid Amount<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Booking.PaidAmount" name="PaidAmount" placeholder="Contract Amount"
+                                       ng-change="GetDueAmount(Booking.PaidAmount)"
+                                       ng-class="{'validation-error': BookingForm.PaidAmount.$invalid && submitted}" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Due Amount</label>
+                            &nbsp;
+                            <span class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="font-weight:bold;font-size:20px">{{Due}}</span>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" ng-hide="Booking.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-show="Booking.ID>0">
+                            <a ng-click="printer.printReport('/Hajj/Booking/Report?id=' + Booking.ID);" class="btn btn-danger pull-right" style="margin-right:10px">Print</a>
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" ng-show="Booking.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/Booking/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/BookingCreateController.js"></script>

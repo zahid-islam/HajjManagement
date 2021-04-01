@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="autoSoftErpReportApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title | Autosoft Hospital Management System</title>
+
+    <!---CSS-->
+
+    <link href="~/App_Style/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/App_Style/PrintStyle/report-preview-style.css" rel="stylesheet" />
+
+    <!---JS-->
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/App_Style/angular-filter/angular-filter-min.js"></script>
+
+    <script type="text/javascript">
+        var reportApp = angular.module("autoSoftErpReportApp", ['angular.filter']);
+    </script>
+
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

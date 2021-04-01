@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Collection Payment Report";
+}
+<style>
+    hr {
+        margin: 0px;
+    }
+</style>
+
+<center><h6 class="print_title" style="border-style: solid; width:320px; text-align:center; margin-top:10px;">Collection Payment List</h6></center>
+<div class="clearfix">&nbsp;</div>
+<div class="row" ng-controller="ReportsController">
+    <div style="margin-top: 10px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <table class="table table-responsive table-bordered table-condensed" style="margin-bottom:10px; width:100%; float:left;">
+            <thead>
+                <tr>
+                    <th>SL</th>
+                    <th>Hajji/Umrah</th>
+                    <th>Group Leader</th>
+                    <th>Mobile</th>
+                    <th>Payment Date</th>
+                    <th>Collection Amount</th>
+                    <th>Payment For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="y in CollectionPaymentList" style="border: 1px solid black;">
+                    <td>{{$index + 1}}</td>
+                    <td ng-bind="y.PaymentFor"></td>
+                    <td ng-bind="y.Name"></td>
+                    <td ng-bind="y.Mobile"></td>
+                    <td ng-bind="y.PaymentDate"></td>
+                    <td ng-bind="y.Amount"></td>
+                    <td ng-bind="y.PaymentFor"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/Reports/ReportsController.js"></script>
+}
+

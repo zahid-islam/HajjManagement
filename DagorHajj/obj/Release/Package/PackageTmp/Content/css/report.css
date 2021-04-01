@@ -1,0 +1,58 @@
+﻿body {
+    font-family: 'Times New Roman';
+    font-size: 15px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border-color: #e2e7eb;
+    padding: 2px 5px;
+}
+.print_title{
+    font-weight:bold;
+}
+.report-three-inch{
+    width:3in;
+}
+.sales-header {
+    /*font-size: 10px;*/
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.sales-address {
+     margin-bottom: 0;
+    /*font-size: 8px;*/
+}
+.sales-contact {
+     margin-bottom: 0;
+    /*font-size: 8px;*/
+}
+
+.elevenpx-font-size{
+    font-size:13px;
+}
+
+.elevenpx-font-size-bold{
+    font-size:13px;
+    font-weight:bold;
+}
+.tenpx-font-size{
+    font-size:12px;
+}
+
+.tenpx-font-size-bold{
+    font-size:12px;
+    font-weight:bold;
+}
+.ninepx-font-size{
+    font-size:11px;
+}
+.ninepx-font-size-bold{
+    font-size:11px;
+    font-weight:bold;
+}
+.eightpx-font-size{
+    font-size:10px;
+}
+.eightpx-font-size-bold{
+    font-size:10px;
+    font-weight:bold;
+}

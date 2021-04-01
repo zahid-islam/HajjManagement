@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" ng-app="autoSoftErpApp">
+<!--<![endif]-->
+<head lang="en">
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/animate.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/style.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/style-responsive.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/default.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/print.css" rel="stylesheet" />
+    <script src="/Content/assets/plugins/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+
+    @*ANGULAR JS*@
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-loading-bar.js"></script>
+
+    <script type="text/javascript">
+        var app = angular.module("autoSoftErpApp", ["angular-loading-bar"]);
+        
+    </script>    
+
+    <style type="text/css">
+        .container {
+            width: 100%;
+        }
+
+        .table thead tr th {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="portrait">
+        <div class="container">
+            <div class="row">
+                <div ng-show="false" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="printer_ref">Report Header Info</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="report-company-name">Nexus Cardiac Hospital & Research Ltd.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="report-company-address">29,Shehra (Dhaka Road), Mymensingh-2200</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="report-company-contact">Phone: 091-519051</p>
+                </div>
+            </div>
+            <div ng-show="false" class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                    <img src="@Url.Content("~/Content/images/logo-report.jpeg")" alt="" />
+                    <br />
+                </div>
+            </div>
+
+            @RenderBody()
+
+            <div class="clearfix">&nbsp;</div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="clearfix">&nbsp;</div>
+
+            <div class="clearfix">&nbsp;</div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-left">
+                    <p style="font-size:10px; font-style:italic; text-align:left;">
+                        @{
+                            var generationDate = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
+                        }
+                        <strong>Generation Date:</strong> @generationDate
+                    </p>
+                </div>
+            </div>
+
+            <div class="clearfix">&nbsp;</div>
+            <div class="row no-print">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> </div>
+                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2"> <a href="javascript:;" onclick="window.print()" class="btn btn-success pull-right">Print</a> </div>
+                @*<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> <a href="#" onclick="javascript: window.open('', '_self').close();" class="btn btn-success pull-left">Close</a> </div>*@
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+    </div>
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿@model DagorHajj.Models.Supplier
+
+@{
+    ViewBag.Title = "Supplier | " + ViewBag.Message;
+    Layout = "~/Views/Shared/_ApplicationLayout.cshtml";
+}
+<link href="~/Content/css/custom.css" rel="stylesheet" />
+<div class="content" ng-controller="SupplierController">
+
+    <div class="clearfix">&nbsp;</div>
+    <h5 class="page-header">Supplier Information</h5>
+    <form name="frmSupplier" ng-submit="checkValidation() || frmSupplier.$valid && SaveSupplier()" ng-class="{'submitted': submitted}" novalidate>
+
+        <div class="clearfix">&nbsp;</div>
+
+        <div class="panel">
+            <div class="panel-body">
+
+                <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+                <fieldset class="area-border">
+                    <legend class="area-border">{{Title}}</legend>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Supplier Name<span class="red"> * </span></label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" ng-class="{'validation-error':frmSupplier.SupplierName.$invalid && submitted}" class="form-control name" ng-model="Supplier.SupplierName" name="SupplierName" required />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contact Person<span class="red">  </span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" ng-class="{'validation-error':frmSupplier.ContactPerson.$invalid && submitted}" class="form-control name" ng-model="Supplier.ContactPerson"  name="ContactPerson" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Mobile Number<span class="red"> * </span></label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/" ng-class="{'validation-error':frmSupplier.MobileNumber.$invalid && submitted}" class="form-control name" ng-model="Supplier.MobileNumber" name="MobileNumber" required />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contact Number<span class="red">  </span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/" ng-class="{'validation-error':frmSupplier.ContactNumber.$invalid && submitted}" class="form-control name" ng-model="Supplier.ContactNumber" name="ContactNumber" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Email<span class="red"> * </span></label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="email" ng-class="{'validation-error':frmSupplier.EmailId.$invalid && submitted}" class="form-control name" ng-model="Supplier.EmailId" name="EmailId" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Permanent Address<span class="red">  </span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" ng-class="{'validation-error':frmSupplier.PermanenttAddress.$invalid && submitted}" class="form-control name" ng-model="Supplier.PermanenttAddress" name="PermanenttAddress" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Present Address<span class="red"> </span></label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" ng-class="{'validation-error':frmSupplier.PresentAddress.$invalid && submitted}" class="form-control name" ng-model="Supplier.PresentAddress" name="PresentAddress" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Is Active</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="checkbox" ng-model="Supplier.IsActive" class="checkbox" ng-init="Supplier.IsActive=true" />
+                            </div>
+                        </div>
+                        
+
+                        <div class="clearfix">&nbsp;</div>
+                       
+                        <div class="row" style="margin-top: 50px;">
+                            <div class="form-group">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">
+                                    <input style="margin:5px;" type="submit" ng-show="ButtonStatus=='Add' && IsProcessing==false" value="Save" ng-click="submitted = true" class="btn btn-success pull-right ">
+                                    <a style="margin:5px;" href="" ng-show="ButtonStatus=='Edit'" ng-click="printer.printReport('/Hajj/Supplier/Report?id=' + Supplier.Id);" class="btn btn-danger pull-right" >Preview</a>
+                                    <input style="margin:5px;" type="submit" ng-show="ButtonStatus=='Edit'" value="Update" ng-click="submitted = true" class="btn btn-success pull-right">
+                                    <a href="/Hajj/Supplier/Create" ng-show="ButtonStatus=='Edit'" class="btn btn-success pull-right">Add New</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+
+</div>
+<div class="clearfix">&nbsp;</div>
+<div class="content2">
+    <p><a class="btn btn-success" href="/Hajj/Supplier/Index"><i class="fa fa-arrow-circle-left"></i> Back to previous page</a> </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/SupplierController.js"></script>

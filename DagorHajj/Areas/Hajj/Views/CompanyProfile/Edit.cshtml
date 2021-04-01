@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="CompanyProfileCreateCtrl">
+    <h1 class="page-header">Company Profile | Edit</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="CompanyProfileForm" ng-submit="CompanyProfileForm.$valid && SaveCompanyProfile()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Company Name<span class="red">*</span> </label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Name" ng-model="CompanyProfile.ConpanyName" placeholder="Company Name"
+                                       ng-class="{'validation-error': CompanyProfileForm.Name.$invalid && submitted}" required />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Address</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <textarea data-parsley-range="[1,200]" class="form-control" rows="2" cols="30" placeholder="Company Address"
+                                          ng-model="CompanyProfile.Address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contact NO</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PhoneNmbr" ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/"
+                                       ng-model="CompanyProfile.ContactNo" placeholder="Contact No" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Email Address </label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="tel" class="form-control" ng-model="CompanyProfile.Email" placeholder="Email Address" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+                            <div class="alert-warning col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left"
+                                 ng-show="CompanyProfileForm.PhoneNmbr.$error.pattern">
+                                <p style="color:red"> Valid phone number required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Owner’s Name </label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="CompanyProfile.OwnersName" placeholder="Owner’s Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Owner’s Contact No</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="CompanyProfile.OwnersContactNo" placeholder="Owner’s Contact No" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">License No </label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="CompanyProfile.LicenseNo" placeholder="License No" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Designation</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="CompanyProfile.Designation" placeholder="Designation" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Image Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="imageFile" name="files" ng-model="CompanyProfile.InitialAttachment"
+                                           onchange="angular.element(this).scope().SelectImageFile(this.files)" />
+                                </span>
+                            </div>
+                            <span ng-show="CompanyProfile.ImageAttach != null"><a class="btn btn-default" target="_blank" style="color:green" href="~/UploadedFiles/{{CompanyProfile.ImageAttach}}">{{CompanyProfile.ImageAttach}}</a></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" ng-hide="CompanyProfile.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" ng-show="CompanyProfile.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/CompanyProfile/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/CompanyProfileCreateController.js"></script>

@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="HajjiReferenceCreateCtrl">
+    <h1 class="page-header">Hajji Reference | Create</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="HajjiReferenceForm" ng-submit="HajjiReferenceForm.$valid && SaveHajjiReference()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Hajji Ref ID<span class="red"> *</span> </label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Hajji" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.hajjiId as x.hajjiId for x in HajjiReferenceList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectHajjiRef($item)"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off" ng-readonly="Contract.ID>0"
+                                           ng-class="{'validation-error': HajjiReferenceForm.HajjiReference.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Group Leader<span class="red"> *</span></label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="GroupLeader" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Name as x.Name for x in GroupLeaderList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectgroupLeader($item)"
+                                           typeahead-min-length="0" name="GroupLeder" autocomplete="off" onchange="SelectgroupLeader(x.ID)"
+                                           ng-class="{'validation-error': HajjiReferenceForm.GroupLeder.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Contract Amount with Office<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Contract.ContractAmount" name="ContractAmount" placeholder="Contract Amount"
+                                       ng-class="{'validation-error': HajjiReferenceForm.ContractAmount.$invalid && submitted}" required />
+                            </div>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" ng-hide="Contract.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" ng-show="Contract.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/HajjiReference/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/HajjiReferenceCreateController.js"></script>

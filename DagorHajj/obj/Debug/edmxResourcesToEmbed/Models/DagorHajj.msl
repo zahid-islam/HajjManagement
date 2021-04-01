@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DagorHajjModelStoreContainer" CdmEntityContainer="DagorHajjEntities">
+    <EntitySetMapping Name="AdminSystemUsers">
+      <EntityTypeMapping TypeName="DagorHajjModel.AdminSystemUser">
+        <MappingFragment StoreEntitySet="AdminSystemUser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="AllModule" ColumnName="AllModule" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminSystemUserDetails">
+      <EntityTypeMapping TypeName="DagorHajjModel.AdminSystemUserDetail">
+        <MappingFragment StoreEntitySet="AdminSystemUserDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AdminSystemUserId" ColumnName="AdminSystemUserId" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="ModuleStatus" ColumnName="ModuleStatus" />
+          <ScalarProperty Name="Menu" ColumnName="Menu" />
+          <ScalarProperty Name="Create" ColumnName="Create" />
+          <ScalarProperty Name="Edit" ColumnName="Edit" />
+          <ScalarProperty Name="Delete" ColumnName="Delete" />
+          <ScalarProperty Name="ListView" ColumnName="ListView" />
+          <ScalarProperty Name="ReportPreview" ColumnName="ReportPreview" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="DagorHajjModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HajjYear" ColumnName="HajjYear" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+          <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="UmrahID" ColumnName="UmrahID" />
+          <ScalarProperty Name="PaymentFor" ColumnName="PaymentFor" />
+          <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="HajjiID" ColumnName="HajjiID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyProfiles">
+      <EntityTypeMapping TypeName="DagorHajjModel.CompanyProfile">
+        <MappingFragment StoreEntitySet="CompanyProfile">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ConpanyName" ColumnName="ConpanyName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="OwnersName" ColumnName="OwnersName" />
+          <ScalarProperty Name="OwnersContactNo" ColumnName="OwnersContactNo" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contracts">
+      <EntityTypeMapping TypeName="DagorHajjModel.Contract">
+        <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HajjiID" ColumnName="HajjiID" />
+          <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+          <ScalarProperty Name="ContractAmount" ColumnName="ContractAmount" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupLeaders">
+      <EntityTypeMapping TypeName="DagorHajjModel.GroupLeader">
+        <MappingFragment StoreEntitySet="GroupLeader">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+          <ScalarProperty Name="NID" ColumnName="NID" />
+          <ScalarProperty Name="PassportAttach" ColumnName="PassportAttach" />
+          <ScalarProperty Name="NIDAttach" ColumnName="NIDAttach" />
+          <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Thana" ColumnName="Thana" />
+          <ScalarProperty Name="PostOffice" ColumnName="PostOffice" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ContactNoKSA" ColumnName="ContactNoKSA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HajjiStatus">
+      <EntityTypeMapping TypeName="DagorHajjModel.HajjiStatu">
+        <MappingFragment StoreEntitySet="HajjiStatus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MuharramRelations">
+      <EntityTypeMapping TypeName="DagorHajjModel.MuharramRelation">
+        <MappingFragment StoreEntitySet="MuharramRelation">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RelationType" ColumnName="RelationType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Other">
+      <EntityTypeMapping TypeName="DagorHajjModel.Other">
+        <MappingFragment StoreEntitySet="Other">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+          <ScalarProperty Name="InitialName" ColumnName="InitialName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="PurchaseRate" ColumnName="PurchaseRate" />
+          <ScalarProperty Name="SellingRate" ColumnName="SellingRate" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="DateOfExpiry" ColumnName="DateOfExpiry" />
+          <ScalarProperty Name="DoB" ColumnName="DoB" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="SellTo" ColumnName="SellTo" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="DagorHajjModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Settings">
+      <EntityTypeMapping TypeName="DagorHajjModel.Setting">
+        <MappingFragment StoreEntitySet="Settings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="PackageRate" ColumnName="PackageRate" />
+          <ScalarProperty Name="HajjLevy" ColumnName="HajjLevy" />
+          <ScalarProperty Name="LevyYear" ColumnName="LevyYear" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="EditedAt" ColumnName="EditedAt" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="DagorHajjModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="PermanenttAddress" ColumnName="PermanenttAddress" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedAt" ColumnName="EditedAt" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="DagorHajjModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="FlightDate" ColumnName="FlightDate" />
+          <ScalarProperty Name="Carier" ColumnName="Carier" />
+          <ScalarProperty Name="FlightNo" ColumnName="FlightNo" />
+          <ScalarProperty Name="TicketNo" ColumnName="TicketNo" />
+          <ScalarProperty Name="AirlinesPNR" ColumnName="AirlinesPNR" />
+          <ScalarProperty Name="GdsPNR" ColumnName="GdsPNR" />
+          <ScalarProperty Name="InitialName" ColumnName="InitialName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PurchaseRate" ColumnName="PurchaseRate" />
+          <ScalarProperty Name="SellingRate" ColumnName="SellingRate" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="DateOfExpiry" ColumnName="DateOfExpiry" />
+          <ScalarProperty Name="DoB" ColumnName="DoB" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="SellTo" ColumnName="SellTo" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketSectors">
+      <EntityTypeMapping TypeName="DagorHajjModel.TicketSector">
+        <MappingFragment StoreEntitySet="TicketSector">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="Sector" ColumnName="Sector" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTypes">
+      <EntityTypeMapping TypeName="DagorHajjModel.TransactionType">
+        <MappingFragment StoreEntitySet="TransactionType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UmrahStatus">
+      <EntityTypeMapping TypeName="DagorHajjModel.UmrahStatu">
+        <MappingFragment StoreEntitySet="UmrahStatus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DagorHajjModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LastLoggedInDateTime" ColumnName="LastLoggedInDateTime" />
+          <ScalarProperty Name="AllowedNoOfLogins" ColumnName="AllowedNoOfLogins" />
+          <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
+          <ScalarProperty Name="AllowedLoginHours" ColumnName="AllowedLoginHours" />
+          <ScalarProperty Name="AllowedLoginMinutes" ColumnName="AllowedLoginMinutes" />
+          <ScalarProperty Name="ActiveBranchId" ColumnName="ActiveBranchId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hajjis">
+      <EntityTypeMapping TypeName="DagorHajjModel.Hajji">
+        <MappingFragment StoreEntitySet="Hajji">
+          <ScalarProperty Name="PermanentPostCode" ColumnName="PermanentPostCode" />
+          <ScalarProperty Name="PermanentPostOffice" ColumnName="PermanentPostOffice" />
+          <ScalarProperty Name="PermanentThana" ColumnName="PermanentThana" />
+          <ScalarProperty Name="PermanentDistrict" ColumnName="PermanentDistrict" />
+          <ScalarProperty Name="MuharramRelationID" ColumnName="MuharramRelationID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="PostOffice" ColumnName="PostOffice" />
+          <ScalarProperty Name="Thana" ColumnName="Thana" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="LastHajjYear" ColumnName="LastHajjYear" />
+          <ScalarProperty Name="MuharramName" ColumnName="MuharramName" />
+          <ScalarProperty Name="PerformingHajj" ColumnName="PerformingHajj" />
+          <ScalarProperty Name="ContractAmount" ColumnName="ContractAmount" />
+          <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+          <ScalarProperty Name="EmergencyContactNo" ColumnName="EmergencyContactNo" />
+          <ScalarProperty Name="EmergencyName" ColumnName="EmergencyName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="InitialName" ColumnName="InitialName" />
+          <ScalarProperty Name="PID" ColumnName="PID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
+          <ScalarProperty Name="NIDAttach" ColumnName="NIDAttach" />
+          <ScalarProperty Name="PassportAttach" ColumnName="PassportAttach" />
+          <ScalarProperty Name="NID" ColumnName="NID" />
+          <ScalarProperty Name="PlaceOfPassportIssue" ColumnName="PlaceOfPassportIssue" />
+          <ScalarProperty Name="PassportIssueDate" ColumnName="PassportIssueDate" />
+          <ScalarProperty Name="PassportExpiryDate" ColumnName="PassportExpiryDate" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
+          <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+          <ScalarProperty Name="SpouseContactNo" ColumnName="SpouseContactNo" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+          <ScalarProperty Name="DoB" ColumnName="DoB" />
+          <ScalarProperty Name="HajjID" ColumnName="HajjID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierPayments">
+      <EntityTypeMapping TypeName="DagorHajjModel.SupplierPayment">
+        <MappingFragment StoreEntitySet="SupplierPayment">
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="StatusChangableDate" ColumnName="StatusChangableDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PaymentFor" ColumnName="PaymentFor" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+          <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="DagorHajjModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="OtherId" ColumnName="OtherId" />
+          <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="StatusChangableDate" ColumnName="StatusChangableDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PaymentFor" ColumnName="PaymentFor" />
+          <ScalarProperty Name="UmrahID" ColumnName="UmrahID" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+          <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="HajjiID" ColumnName="HajjiID" />
+          <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Umrahs">
+      <EntityTypeMapping TypeName="DagorHajjModel.Umrah">
+        <MappingFragment StoreEntitySet="Umrah">
+          <ScalarProperty Name="PurchaseAmount" ColumnName="PurchaseAmount" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="PermanentPostCode" ColumnName="PermanentPostCode" />
+          <ScalarProperty Name="PermanentPostOffice" ColumnName="PermanentPostOffice" />
+          <ScalarProperty Name="PermanentThana" ColumnName="PermanentThana" />
+          <ScalarProperty Name="PermanentDistrict" ColumnName="PermanentDistrict" />
+          <ScalarProperty Name="MuharramRelationID" ColumnName="MuharramRelationID" />
+          <ScalarProperty Name="FlightArrivalDate" ColumnName="FlightArrivalDate" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="PostOffice" ColumnName="PostOffice" />
+          <ScalarProperty Name="Thana" ColumnName="Thana" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ContractAmount" ColumnName="ContractAmount" />
+          <ScalarProperty Name="LastUmrahYear" ColumnName="LastUmrahYear" />
+          <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="InitialName" ColumnName="InitialName" />
+          <ScalarProperty Name="MuharramName" ColumnName="MuharramName" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
+          <ScalarProperty Name="NIDAttach" ColumnName="NIDAttach" />
+          <ScalarProperty Name="PassportAttach" ColumnName="PassportAttach" />
+          <ScalarProperty Name="NID" ColumnName="NID" />
+          <ScalarProperty Name="PlaceOfPassportIssue" ColumnName="PlaceOfPassportIssue" />
+          <ScalarProperty Name="PassportIssueDate" ColumnName="PassportIssueDate" />
+          <ScalarProperty Name="PassportExpiryDate" ColumnName="PassportExpiryDate" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="SpouseContactNo" ColumnName="SpouseContactNo" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+          <ScalarProperty Name="DoB" ColumnName="DoB" />
+          <ScalarProperty Name="UmrahID" ColumnName="UmrahID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

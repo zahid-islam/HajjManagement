@@ -1,0 +1,852 @@
+﻿
+<div ng-controller="ModalHajjCtrl">
+
+    <form method="get" action="/Hajj/Reports/ReportHajj" class="modal fade report-modal" id="hajj-agreement" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Hajj Agreement</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Group Leader <span class="red">*</span></label>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div class="input-group" id="consTypeHeadId">
+                                    <input type="hidden" name="grpLeaderId" ng-model="GrpLeaderId" value="{{GrpLeaderId}}" />
+                                    <input ng-model="Name" class="form-control" ng-change="ClearHajjiDropdown()"
+                                           type="text"
+                                           empty-typeahead
+                                           name="name"
+                                           typeahead-on-select="OnSelectGroupLeader($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Grouopleadr  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           ng-required="true" spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Hajji <span class="red">*</span></label>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div class="input-group" id="hajjTypeHeadId">
+                                    <input type="hidden" name="hajjId" ng-model="HajjId" value="{{HajjId}}" />
+                                    <input ng-model="FullName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="fullName"
+                                           typeahead-on-select="OnSelectHajji($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.FullName as x.FullName for x in AllHajjis  | filter:{'FullName':$viewValue}  | limitTo:10"
+                                           ng-required="true" spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="clearfix">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/PartyLeaderReport" class="modal fade report-modal" id="hajj-PartyLeaderReportByDate" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Party Ledger</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Ledger For</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="id" ng-model="Hajj.Id" value="{{Hajj.Id}}" />
+                                    <input ng-model="PaymentTypeName" class="form-control"
+                                           type="text" ng-change="ChangeLedgerFor()"
+                                           empty-typeahead
+                                           name="PaymentTypeName"
+                                           typeahead-on-select="SetTransactionById($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Transactions  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Group Leader</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div class="input-group" id="consTypeHeadId">
+                                    <input type="hidden" name="groupLeaderId" ng-model="GrpLeaderId" ng-value="GrpLeaderId" />
+                                    <input ng-model="groupLeaderName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="groupLeaderName"
+                                           typeahead-on-select="OnSelectGroupLeader($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Grouopleadr  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           ng-required="true" spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" autocomplete="off" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" autocomplete="off" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+    <form method="get" action="/Hajj/Reports/PartyLeaderReportByDateAndCompanyId" class="modal fade report-modal" id="hajj-PartyLeaderReportByDateAndCompanyId" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Datewise Payments</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range <span class="red">*</span></label>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" data-parsley-required="true" autocomplete="off" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" data-parsley-required="true" autocomplete="off" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/GroupLeaderWiseHajjList" class="modal fade report-modal" id="report-GroupLeaderWiseHajjList" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Hajj Report</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-5 col-md-5 col-sm-12 col-xs-12">Group Leader</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group" id="consTypeHeadId">
+                                    <input type="hidden" name="groupLeaderId" ng-model="GroupLeaderId" value="{{GroupLeaderId}}" />
+                                    <input ng-model="Name" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="name"
+                                           typeahead-on-select="OnSelectGrpLeader($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Grouopleadr  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-5 col-md-5 col-sm-12 col-xs-12">Year Of Performance</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="id" ng-model="Hajj.PerformingHajj" value="{{Hajj.PerformingHajj}}" />
+                                    <input ng-model="PerformingHajj" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="performYear"
+                                           typeahead-on-select="SetPerformYear($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.PerformingHajj as x.PerformingHajj for x in Performs  | filter:{'PerformingHajj':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-5 col-md-5 col-sm-12 col-xs-12">Status</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="Status" ng-model="Hajj.Status" value="{{Hajj.Status}}" />
+                                    <input ng-model="StatusName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="Status2"
+                                           typeahead-on-select="SetStatusId($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.StatusName as x.StatusName for x in Statuses  | filter:{'StatusName':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-5 col-md-5 col-sm-12 col-xs-12">Date Range </label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/GroupLeaderWiseUmrahList" class="modal fade report-modal" id="report-GroupLeaderWiseUmrahList" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Umrah Report</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Status</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="Status" ng-model="Hajj.Status" value="{{Hajj.Status}}" />
+                                    <input ng-model="StatusName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="Status"
+                                           typeahead-on-select="SetStatusId($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.StatusName as x.StatusName for x in UmrahStatus  | filter:{'StatusName':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Group Leader</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group" id="consTypeHeadId">
+                                    <input type="hidden" name="groupLeaderId" ng-model="GroupLeaderId" value="{{GroupLeaderId}}" />
+                                    <input ng-model="Name" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="name"
+                                           typeahead-on-select="OnSelectGrpLeader($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Grouopleadr  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Supplier</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="supplierId" ng-model="supplierId" value="{{SupplierId}}" />
+                                    <input ng-model="SupplierName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="SupplierName"
+                                           typeahead-on-select="OnSelectSupplier($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in Suppliers  | filter:{'SupplierName':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Flight Date</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="flightDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/GroupLeaderWiseTicketList" class="modal fade report-modal" id="report-GroupLeaderWiseTicketList" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Ticket Report</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Group Leader</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group" id="consTypeHeadId">
+                                    <input type="hidden" name="groupLeaderId" ng-model="GroupLeaderId" value="{{GroupLeaderId}}" />
+                                    <input ng-model="Name" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="name"
+                                           typeahead-on-select="OnSelectGrpLeader($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Grouopleadr  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Supplier</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="supplierId" ng-model="supplierId" value="{{SupplierId}}" />
+                                    <input ng-model="SupplierName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="SupplierName"
+                                           typeahead-on-select="OnSelectSupplier($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in Suppliers  | filter:{'SupplierName':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Issue Date</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="IssueDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Flight Date</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="flightDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/GroupLeaderWiseOtherList" class="modal fade report-modal" id="report-GroupLeaderWiseOtherList" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Other Report</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Group Leader</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group" id="consTypeHeadId">
+                                    <input type="hidden" name="groupLeaderId" ng-model="GroupLeaderId" value="{{GroupLeaderId}}" />
+                                    <input ng-model="Name" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="name"
+                                           typeahead-on-select="OnSelectGrpLeader($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Grouopleadr  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Supplier</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="supplierId" ng-model="supplierId" value="{{SupplierId}}" />
+                                    <input ng-model="SupplierName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="SupplierName"
+                                           typeahead-on-select="OnSelectSupplier($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in Suppliers  | filter:{'SupplierName':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/FlightBookingPassangerList" class="modal fade report-modal" id="report-FlightBookingPassangerList" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Flight Booking Passanger List</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">For</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="id" ng-model="Hajj.Id" value="{{Hajj.Id}}" />
+                                    <input ng-model="Name" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="Status"
+                                           typeahead-on-select="SetTransactionById($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Transactions  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           ng-required="true" spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/SupplierPaymentList" class="modal fade report-modal" id="report-SupplierPaymentList" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Supplier Payment Report</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Payment For</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="paymentFor" ng-model="PaymentFor" value="{{PaymentFor}}" />
+                                    <input ng-model="PaymentFor" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="PaymentFor"
+                                           typeahead-on-select="SetTransactionById($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.PaymentFor as x.PaymentFor for x in SuplierPayForList  | filter:{'PaymentFor':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Supplier</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="supplierId" ng-model="supplierId" value="{{SupplierId}}" />
+                                    <input ng-model="SupplierName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="SupplierName"
+                                           typeahead-on-select="OnSelectSupplier($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in Suppliers  | filter:{'SupplierName':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/PaymentCollectionList" class="modal fade report-modal" id="report-PaymentCollectionList" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Collection Report</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Collection For</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="id" ng-model="Hajj.Id" value="{{Hajj.Id}}" />
+                                    <input ng-model="PaymentTypeName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="PaymentTypeName"
+                                           typeahead-on-select="SetTransactionById($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Transactions  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Group Leader</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group" id="consTypeHeadId">
+                                    <input type="hidden" name="groupLeaderId" ng-model="GroupLeaderId" value="{{GroupLeaderId}}" />
+                                    <input ng-model="Name" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="name"
+                                           typeahead-on-select="OnSelectGrpLeader($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.Name as x.Name for x in Grouopleadr  | filter:{'Name':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="get" ng-controller="ReportsController" action="/Hajj/Reports/SupplierLedgerList" class="modal fade report-modal" id="hajj-SupplierLeaderReport" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Supplier Ledger</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Supplier</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="supplierId" ng-model="supplierId" value="{{SupplierId}}" />
+                                    <input ng-model="SupplierName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="supplierName"
+                                           typeahead-on-select="OnSelectSupplier($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in Suppliers  | filter:{'SupplierName':$viewValue}  | limitTo:10"
+                                           spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Date Range</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="input-group input-daterange">
+                                    <input type="text" class="form-control" name="fromDate" placeholder="DD-MM-YYYY" />
+                                    <span class="input-group-addon">To</span>
+                                    <input type="text" class="form-control" name="toDate" placeholder="DD-MM-YYYY" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="get" action="/Hajj/Reports/InvoiceTicketOther" class="modal fade report-modal" id="hajj-InvoiceTicketOther" data-parsley-validate="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Invoice Report</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12"><span id="showText"></span></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Invoice For</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="invoiceForId" ng-model="InvoiceForId" value="{{InvoiceForId}}" />
+                                    <input ng-model="InvoiceForName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="invoiceForName"
+                                           typeahead-on-select="OnSelectInvoiceFor($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead="x.ForName as x.ForName for x in InvoiceFor"
+                                           ng-required="true" spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">Invoice Id</label>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="hidden" name="invoiceId" ng-model="InvoiceId" value="{{InvoiceId}}" />
+                                    <input ng-model="InvoiceName" class="form-control"
+                                           type="text"
+                                           empty-typeahead
+                                           name="invoiceName"
+                                           typeahead-on-select="OnSelectInvoice($item)"
+                                           autocomplete="off"
+                                           typeahead-editable="false"
+                                           uib-typeahead=" x.ID as x.Name for x in TicketOtherHolder | filter:{'ID':$viewValue}  | limitTo:10"
+                                           ng-required="true" spellcheck="false"
+                                           typeahead-min-length="0" />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Previews</button> &nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/Areas/Hajj/Scripts/ModalHajjCtrl.js"></script>
+<script src="~/Areas/Hajj/Scripts/Reports/ReportsController.js"></script>

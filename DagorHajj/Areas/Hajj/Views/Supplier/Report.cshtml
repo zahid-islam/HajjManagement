@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Supplier Information | Invoice No - " + @ViewBag.Id;
+}
+<style>
+    hr {
+        margin: 0px;
+    }
+</style>
+
+<center><h6 class="print_title" style="border-style: solid; width:300px; text-align:center; margin-top:10px;">Supplier Information</h6></center>
+<div class="clearfix">&nbsp;</div>
+<div class="row" ng-controller="SupplierReportController">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <table style="margin-bottom:10px; width:100%; float:left;">
+            <thead>
+                <tr>
+                    <td style="width:15%; text-align:left;"><strong>Reg Id</strong></td>
+                    <td style="width:35%; text-align:left;">: {{Supplier.Id}}</td>
+
+                    <td style="width:15%; text-align:left;"><strong>Mobile </strong></td>
+                    <td style="width:30%; text-align:left;">: {{Supplier.Mobile}}</td>
+                </tr>
+                <tr>
+                    <td style="width:15%; text-align:left;"><strong>Name</strong></td>
+                    <td style="width:35%; text-align:left;">: {{Supplier.SupplierName}}</td>
+                    <td style="width:15%; text-align:left;"><strong>Contact Person</strong></td>
+                    <td style="width:35%; text-align:left;">: {{Supplier.ContactPerson}} </td>
+                </tr>
+                <tr>
+                    <td style="width:15%; text-align:left;"><strong>Mobile Number</strong></td>
+                    <td style="width:35%; text-align:left;">: {{Supplier.MobileNumber}}</td>
+                    <td style="width:15%; text-align:left;"><strong>Contact Number</strong></td>
+                    <td style="width:35%; text-align:left;">: {{Supplier.ContactNumber}} </td>
+                </tr>
+                <tr>
+                    <td style="width:15%; text-align:left;"><strong>Email</strong></td>
+                    <td style="width:35%; text-align:left;">: {{Supplier.EmailId}}</td>
+                    <td style="width:15%; text-align:left;"><strong>Permanent Address</strong></td>
+                    <td style="width:35%; text-align:left;">: {{Supplier.PermanenttAddress}} </td>
+                </tr>
+                <tr>
+                    <td style="width:15%; text-align:left;"><strong>Present Address</strong></td>
+                    <td style="width:35%; text-align:left;">: {{Supplier.PresentAddress}}</td>
+                    <td style="width:15%; text-align:left;"></td>
+                    <td style="width:35%; text-align:left;"> </td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+   
+</div>
+
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/SupplierReportController.js"></script>
+    <script>
+        app.value("routeData", { Id: @Html.Raw(ViewBag.Id)});
+    </script>
+}
+

@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Passinger List";
+}
+<style>
+    hr {
+        margin: 0px;
+    }
+</style>
+
+<center><h6 class="print_title" style="border-style: solid; width:320px; text-align:center; margin-top:10px;">Flight Booking Passanger List</h6></center>
+<div class="clearfix">&nbsp;</div>
+<div class="row" ng-controller="ReportsController">
+    <div style="margin-top: 10px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <table class="table table-responsive table-bordered table-condensed" style="margin-bottom:10px; width:100%; float:left;">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Passport No</th>
+                    <th>Date Of Birth</th>
+                    <th>Date Of Expiry</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="y in Bookings" style="border: 1px solid black;">
+                    <td>{{$index + 1}}</td>
+                    <td ng-bind="y.FullName"></td>
+                    <td ng-bind="y.PassportNo"></td>
+                    <td ng-bind="y.DoB"></td>
+                    <td ng-bind="y.PassportExpiryDate"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/Reports/ReportsController.js"></script>
+
+}
+

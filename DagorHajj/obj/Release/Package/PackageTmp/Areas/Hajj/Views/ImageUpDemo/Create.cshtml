@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Image";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="ImageUpCreateCtrl">
+    <h1 class="page-header">Image Up | Create</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="ImageDemoForm" ng-submit="ImageDemoForm.$valid && SaveFiles()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                @*&nbsp;*@
+                <div class="row">
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">PassPort Attach</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" name="files" ng-model="Image.PassportAttach" accept="image/*"
+                                           multiple onchange="angular.element(this).scope().selectPassportFile(this.files), readURL(this);"/>
+                                </span>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                    <img id="Image" name="InitialAttachment" src="~/UploadedFiles/noimage.jpg"
+                                         alt="Initial Attachment" style="border-radius:2px;width:128px;height:129px;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">NID Attach</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" name="files" ng-model="Image.NIDAttach" accept="image/*"
+                                           multiple onchange="angular.element(this).scope().selectNIDFile(this.files), readURL(this);"/>
+                                </span>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                    <img id="InitialAttachment" name="InitialAttachment" src="~/UploadedFiles/noimage.jpg"
+                                         alt="Initial Attachment" style="border-radius:2px;width:128px;height:129px;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Image Attach</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" name="files" ng-model="Image.ImageAttach" accept="image/*"
+                                           multiple onchange="angular.element(this).scope().selectImageFile(this.files), readURL(this);" />
+                                </span>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                    <img id="InitialAttachment" name="InitialAttachment" src="~/UploadedFiles/noimage.jpg"
+                                         alt="Initial Attachment" style="border-radius:2px;width:128px;height:129px;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" ng-hide="Pilimgram.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        @*<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" ng-show="Pilimgram.ID>0">
+                                <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/Pilimgram/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/ImageUpDemoCreateController.js"></script>
+
+@section scripts{
+
+    <script>
+        function readUrl(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#Image")
+                    .attr('src', e.target.result)
+                    .width(80)
+                    .height(80);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

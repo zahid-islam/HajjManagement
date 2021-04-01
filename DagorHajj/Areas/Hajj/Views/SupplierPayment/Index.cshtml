@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="content" ng-controller="SupplierPaymentListController">
+    @if (ViewBag.UserRloe != "Super Admin")
+    {
+        <span class="pull-right"><a href="/Hajj/SupplierPayment/Create" class="btn btn-success m-r-5 m-b-5">Add New</a></span>
+    }
+    <div class="pull-right" style="margin-left:5px; margin-right:2px;">
+        <input type="text" class="form-control" placeholder="Search Supplier" ng-change="SearchFromList()" ng-model="searchText" />
+    </div>
+    <h1 class="page-header">List of Supplier Payment Status</h1>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:void(0);" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <h4 class="panel-title"><strong>List of Supplier Payment Status</strong></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Supplier</th>
+                                    <th>Payment Date</th>
+                                    <th>Amount</th>
+                                    <th>Purpose</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in filteredPayment | filter:searchText">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{x.FullName }}</td>
+                                    <td>{{x.PaymentDate}}</td>
+                                    <td>{{x.Amount}}</td>
+                                    <th>{{x.PaymentFor}}</th>
+                                    <td><a class="btn btn-info btn-xs white" href="/Hajj/SupplierPayment/Edit?Id={{x.Id}}"><i class="fa fa-pencil"></i></a></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <ul uib-pagination total-items="DataList.length" items-per-page="itemsPerPage" ng-change="pageChanged()" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Areas/Hajj/Scripts/SupplierPaymentListController.js"></script>

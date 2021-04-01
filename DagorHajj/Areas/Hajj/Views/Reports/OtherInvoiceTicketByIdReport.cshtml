@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Other Invoice Ticket Report";
+}
+<style>
+    hr {
+        margin: 0px;
+    }
+    
+</style>
+
+<center><h6 class="print_title shadow-header" style="text-align:center; margin-top:10px;text-shadow: 1px 0px 1px black !important;">Invoice</h6></center>
+<hr />
+<div class="row" ng-controller="OtherInvoiceTicketByIdReportController">
+    <div id="loader2" ng-show="loading">
+        <img src="~/Content/images/loading.gif" />
+    </div>
+    
+    <div style="margin-top: 10px;" class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+       <table class="table table-responsive table-bordered table-condensed">
+            <tbody>
+                <tr>
+                    <td><b>Invoice No.</b></td>
+                    <td>O{{Ticket.ID}}</td>
+                    <td><b>Invoice Date</b></td>
+                    <td>{{Ticket.InvoiceDate}}</td>
+                </tr>
+                <tr>
+                    <td><b>Reference</b></td>
+                    <td colspan="3">{{Ticket.Name}}</td>
+                </tr>
+                <tr>
+                    <td><b>Name</b></td>
+                    <td colspan="3">{{Ticket.PassengerName}}</td>
+                </tr>
+                
+                <tr>
+                    <td><b>Purpose</b></td>
+                    <td colspan="3">{{Ticket.Purpose}}</td>
+                </tr>
+                <tr>
+                   
+                    <td><b>Selling Rate</b></td>
+                    <td colspan="3">{{Ticket.SellingRate}}</td>
+                </tr>
+                <tr>
+
+                    <td><b>Paid Amount</b></td>
+                    <td colspan="3">{{Ticket.PaidAmount}}</td>
+                </tr>
+                <tr>
+
+                    <td><b>Due Amount</b></td>
+                    <td colspan="3">{{Ticket.SellingRate - Ticket.PaidAmount}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/OtherInvoiceTicketByIdReportController.js"></script>
+
+}
+

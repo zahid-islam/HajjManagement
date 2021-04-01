@@ -1,0 +1,18 @@
+﻿.show-hide {
+    margin: 10px 0;
+}
+
+.angular-data-table-filter .condition a.active {
+    background: #000!important;
+    border-color: #000!important;
+}
+
+.advance-filter {
+    width: 100%;
+    background: #eee;
+    border: solid 1px #ccc;
+    padding: 15px;
+    position: absolute;
+    margin-top: 0;
+    z-index: 1000
+}

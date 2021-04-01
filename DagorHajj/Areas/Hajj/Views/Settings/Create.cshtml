@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_ApplicationLayout.cshtml";
+}
+
+<div class="content" ng-controller="SettingsController">
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+    <form name="settingForm" novalidate>
+        <div class="panel">
+            <div class="panel-body">
+                <fieldset class="area-border">
+                    <legend class="area-border">Package Setting</legend>
+                    <br />
+                    <div class="row">
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Package Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" autocomplete="off" ng-model="Setting.PackageName" name="PackageName">
+                            </div>
+
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Package Rate</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" autocomplete="off" ng-model="Setting.PackageRate" name="PackageRate" ng-pattern="numericPattern"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="panel">
+            <div class="panel-body">
+                <fieldset class="area-border">
+                    <legend class="area-border">Frequent Visit Charge</legend>
+                    <br />
+                    <div class="row">
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Levy Year</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="LevyYear" ng-change="CalculateTotal()" ng-model="Setting.LevyYear" ng-pattern="numericPattern">
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Hajj Levy</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="HajjLevy" ng-model="Setting.HajjLevy" ng-pattern="numericPattern">
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input type="button" ng-click="SaveSetting()" value="Submit" class="btn btn-success pull-right">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/Areas/Hajj/Scripts/SettingsController.js"></script>

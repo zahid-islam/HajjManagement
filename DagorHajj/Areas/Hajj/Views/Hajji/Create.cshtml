@@ -1,0 +1,459 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    var count = ViewBag.count;
+
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="HajjiCreateCtrl">
+    <h1 class="page-header">Hajji | Create</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="HajjiForm" ng-submit="HajjiForm.$valid && SaveHajjiData()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Hajji ID</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.HajjID" ng-init="Hajji.HajjID = '@ViewBag.count'" placeholder="Hajji ID" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">PID</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PID" placeholder="PID" ng-model="Hajji.PID" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">NG No</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.SerialNo" placeholder="NG No" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Tracking No</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.TrackingNo" placeholder="Tracking No" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Initial Name<span class="red"> *</span></label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Hajji.InitialName" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x as x for x in InitialNameList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" name="InitialName"
+                                           ng-class="{'validation-error': HajjiForm.InitialName.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">First Name<span class="red" ng-show="Hajji.LastName==null && Hajji.FirstName==null"> *</span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="FirstName" placeholder="First Name" ng-model="Hajji.FirstName"
+                                       ng-class="{'validation-error': HajjiForm.FirstName.$invalid && submitted}"
+                                       ng-required="(Hajji.LastName==null || Hajji.LastName == '') && (Hajji.FirstName==null || Hajji.FirstName== '')" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Middle Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.MiddleName" placeholder="Middle Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Last Name <span class="red" ng-show="Hajji.LastName==null && Hajji.FirstName==null"> *</span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="LastName" placeholder="Last Name" ng-model="Hajji.LastName"
+                                       ng-class="{'validation-error': HajjiForm.LastName.$invalid && submitted}"
+                                       ng-required="(Hajji.LastName==null || Hajji.LastName == '') && (Hajji.FirstName==null || Hajji.FirstName== '')" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Date Of Birth</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" class="form-control" ng-model="Hajji.DoB" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Place Of Birth</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Hajji.PlaceOfBirth" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.name as x.name for x in DistrictList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Father Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.FatherName" placeholder="Father Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Mother Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.MotherName" placeholder="Mother Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contact NO</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PhoneNmbr" ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/" ng-model="Hajji.ContactNo" placeholder="Contact No" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">National ID</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="NID" ng-model="Hajji.NID" ng-pattern="/(^[0-9]{1}((\d){9}|(\d){12}|(\d){16}))$/" placeholder="National ID" />
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+                            <div class="alert-warning col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left" ng-show="HajjiForm.NID.$error.pattern">
+                                <p style="color:red"> Valid National Id Required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+                            <div class="alert-warning col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left" ng-show="HajjiForm.PhoneNmbr.$error.pattern">
+                                <p style="color:red"> Valid phone number required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Spouse Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.SpouseName" placeholder="Spouse Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Spouse Contact NO</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="SpouseContactNo" ng-model="Hajji.SpouseContactNo" ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/" placeholder="Spouse Contact No" />
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+                            <div class="alert-warning col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left" ng-show="HajjiForm.SpouseContactNo.$error.pattern">
+                                <p style="color:red">Valid phone number required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Emergency Name</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.EmergencyName" placeholder="Emergency Name" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Emergency Contact NO</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="EmergencyContactNo" ng-model="Hajji.EmergencyContactNo" ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/" placeholder="Emergency Contact NO" />
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+                            <div class="alert-warning col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left" ng-show="HajjiForm.EmergencyContactNo.$error.pattern">
+                                <p style="color:red">Valid phone number required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Muharram Name<span class="red" ng-hide="Hajji.InitialName == 'Mr' || Hajji.InitialName == 'Mastr' || Hajji.InitialName == null || Hajji.InitialName.length  == 0 "> *</span></label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+                                <input type="text" class="form-control" ng-model="Hajji.MuharramName" ng-show="Hajji.InitialName == 'Mr' || Hajji.InitialName == 'Mastr' || Hajji.InitialName == null || Hajji.InitialName.length  == 0" placeholder="Muharram Name" />
+
+                                <input type="text" class="form-control" name="MuharramName" ng-model="Hajji.MuharramName" placeholder="Muharram Name"
+                                       ng-hide="Hajji.InitialName == 'Mr' || Hajji.InitialName == 'Mastr' || Hajji.InitialName == null || Hajji.InitialName.length  == 0 " ng-class="{'validation-error': HajjiForm.MuharramName.$invalid && submitted}"
+                                       ng-required="Hajji.InitialName == 'Mrs' || Hajji.InitialName == 'Miss'" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Relation With Muharram</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="RelationWithMaharram" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.RelationType as x.RelationType for x in MuharramRelationList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectMuharramStatus($item)"
+                                           typeahead-min-length="0" name="RelationWithMaharram" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="font-size:15px;font-weight:bold">Present Address</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">District</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Hajji.District" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.name as x.name for x in DistrictList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Thana</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Thana" ng-model="Hajji.Thana" placeholder="Thana" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Office</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostOffice" ng-model="Hajji.PostOffice" placeholder="Post Office" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Code</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostCode" ng-model="Hajji.PostCode" placeholder="Post Code" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Address</label>
+                            <div class="control-label col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PresentAddress" ng-model="Hajji.PresentAddress" placeholder="Present Address" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="font-size:15px;font-weight:bold">Permanent Address</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <label style="background-color:lightgreen;">
+                                    <input type="checkbox" ng-model="chechBoxStatus" ng-click="GetPermanentAddress()" />
+                                    Tick if Present Address And Permanent Address are same
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">District</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Hajji.PermanentDistrict" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.name as x.name for x in DistrictList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Thana</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Thana" ng-model="Hajji.PermanentThana" placeholder="Thana" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Office</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostOffice" ng-model="Hajji.PermanentPostOffice" placeholder="Post Office" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Code</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostCode" ng-model="Hajji.PermanentPostCode" placeholder="Post Code" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Address</label>
+                            <div class="control-label col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PermanentAddress" ng-model="Hajji.PermanentAddress" placeholder="Permanent Address" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport No</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="FullName" ng-model="Hajji.PassportNo" placeholder="Passport No" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport Issue Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" ng-model="Hajji.PassportIssueDate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport Expiry Date</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="date" ng-model="Hajji.PassportExpiryDate" class="form-control">
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Place Of Passport Issue</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <textarea data-parsley-range="[1,200]" class="form-control" rows="2" cols="30" placeholder="Place of Pasport Issue"
+                                          ng-model="Hajji.PlaceOfPassportIssue"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Performing Hajj</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Hajji.PerformingHajj" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Year as x.Year for x in HajjYearList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Last Hajj Year</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.LastHajjYear" placeholder="Last Hajj Year" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Ref/Group Leader<span class="red"> *</span></label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="GroupLeader" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Name as x.Name for x in GroupLeaderList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectgroupLeader($item)"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off"
+                                           ng-class="{'validation-error': HajjiForm.HajjiReference.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contract Amount</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.ContractAmount" placeholder="Contract Amount" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Status</label>
+                            <div class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Status" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.Title as x.Title for x in HajjiStatusList | filter:$viewValue | limitTo:10"
+                                           typeahead-on-select="SelectHajjiStatus($item)"
+                                           typeahead-min-length="0" name="HajjiReference" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Email</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="Hajji.Email" placeholder="Email" />
+                            </div>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">PassPort Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="passportFile" name="files" ng-model="Hajji.InitialAttachment"
+                                           onchange="angular.element(this).scope().SelectPassportFile(this.files);" />
+                                </span>
+                            </div>
+                            <span ng-show="Hajji.PassportAttach != null">
+                                <a class="btn btn-default" target="_blank" style="color:green"
+                                   href="~/UploadedFiles/{{Hajji.PassportAttach}}">{{Hajji.PassportAttach}}</a>
+                            </span>
+                        </div>
+                    </div>
+
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">File Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="file" name="files" ng-model="Hajji.InitialAttachment"
+                                           onchange="angular.element(this).scope().SelectFile(this.files);" />
+                                </span>
+                            </div>
+                            <span ng-show="Hajji.NIDAttach != null"><a class="btn btn-default" target="_blank" style="color:green" href="~/UploadedFiles/{{Hajji.NIDAttach}}">{{Hajji.NIDAttach}}</a></span>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Image Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="imageFile" name="files" ng-model="Hajji.InitialAttachment"
+                                           onchange="angular.element(this).scope().SelectImageFile(this.files)" />
+                                </span>
+                            </div>
+                            <span ng-show="Hajji.ImageAttach != null"><a class="btn btn-default" target="_blank" style="color:green" href="~/UploadedFiles/{{Hajji.ImageAttach}}">{{Hajji.ImageAttach}}</a></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                            <a class="btn btn-success pull-right" ng-show="Hajji.ID" ng-href="/Hajj/Payment/Create?hajjiId={{Hajji.ID}}">Payment</a>
+                            @*&groupLeaderId={{Hajji.GroupLeaderID}}*@
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" ng-hide="Hajji.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" ng-show="Hajji.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/Hajji/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+
+<script src="~/Areas/Hajj/Scripts/HajjiCreateController.js"></script>

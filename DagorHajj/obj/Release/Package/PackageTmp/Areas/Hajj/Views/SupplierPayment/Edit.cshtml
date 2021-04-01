@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="PaymentCreateCtrl" ng-init="GetPaymentById()">
+    <h1 class="page-header">Supplier Payment Status | Edit</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="PaymentForm" ng-submit="PaymentForm.$valid && SavePayment()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Supplier Name<span class="red"> *</span></label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Payment.SupplierName" empty-typeahed typeahead-editable="true"
+                                           typeahead-on-select="SelectSupplier($item)"
+                                           uib-typeahead="x.SupplierName as x.SupplierName for x in SupplierList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" name="SupplierName" autocomplete="off"
+                                           ng-class="{'validation-error': PaymentForm.SupplierName.$invalid && submitted}" required />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Payment Date<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="date" ng-model="Payment.PaymentDate" class="form-control" name="PaymentDate"
+                                       ng-class="{'validation-error': PaymentForm.PaymentDate.$invalid && submitted}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Payment Amount<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="number" min="0" max="9999999999" class="form-control" ng-model="Payment.Amount" name="Amount"
+                                       ng-change="GetDueAmount(Payment.Amount)"
+                                       ng-class="{'validation-error': PaymentForm.Amount.$invalid && submitted}" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Purpose</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="Payment.PaymentFor"
+                                           empty-typeahed
+                                           name="Purpose"
+                                           placeholder="Purpose"
+                                           typeahead-editable="false"
+                                           typeahead-on-select="OnSelectPurpose($item)"
+                                           uib-typeahead="x.Name as x.Name for x in Purposes"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" ng-hide="Payment.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-show="Payment.ID>0">
+                            <a ng-click="printer.printReport('/Hajj/Payment/Report?id=' + Payment.ID);" class="btn btn-danger pull-right" style="margin-right:10px">Print</a>
+                        </div>*@
+                        <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12" ng-show="Payment.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/SupplierPayment/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+
+</div>
+
+@section Scripts{
+    <script src="~/Areas/Hajj/Scripts/SupplierPaymentCreateController.js"></script>
+}

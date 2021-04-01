@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Due Statement";
+}
+<style>
+    hr {
+        margin: 0px;
+    }
+</style>
+
+<center><h6 class="print_title" style="border-style: solid; width:320px; text-align:center; margin-top:10px;">Group Leader Wise Ticket List</h6></center>
+<div class="clearfix">&nbsp;</div>
+<div class="row" ng-controller="ReportsController">
+    <div style="margin-top: 10px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <table class="table table-responsive table-bordered table-condensed" style="margin-bottom:10px; width:100%; float:left;">
+            <thead>
+                <tr>
+                    <th>SL</th>
+                    <th>Full Name</th>
+                    <th>Carrier</th>
+                    <th>Issue Date</th>
+                    <th>Flight Date</th>
+                    <th>Ticket No</th>
+                    <th>Supplier</th>
+                    <th>Group Leader</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="x in Tickets">
+                <tr>
+                    <td colspan="8"><b>Group LeaderName : &nbsp;&nbsp;</b><b>{{x[0].GroupLeaderName}}</b></td>
+                </tr>
+                <tr ng-repeat="y in x" style="border: 1px solid black;">
+                    <td>{{$index + 1}}</td>
+                    <td ng-bind="y.PassangerName"></td>
+                    <td ng-bind="y.Carier"></td>
+                    <td ng-bind="y.IssueDate"></td>
+                    <td ng-bind="y.FlightDate"></td>
+                    <td ng-bind="y.TicketNo"></td>
+                    <td ng-bind="y.SupplierName"></td>
+                    <td ng-bind="y.GroupLeaderName"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/Reports/ReportsController.js"></script>
+}
+

@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="UserCreateCtrl">
+    <h1 class="page-header">User Manager | Create</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="UserManagerForm" ng-submit="UserManagerForm.$valid && SaveUserManager()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Name<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="User.Name" name="Name" placeholder="User Name"
+                                       ng-class="{'validation-error': UserManagerForm.Name.$invalid && submitted}" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Email<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="User.Email" name="Email" placeholder="User Email"
+                                       ng-class="{'validation-error': UserManagerForm.Email.$invalid && submitted}" required />
+                            </div>
+                        </div>
+                    </div>
+                    @*@if (ViewBag.user != "Super Admin")
+                    {
+                        <div class="form-group">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Role<span class="red"> *</span> </label>
+                                <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control" ng-model="RoleName" empty-typeahed typeahead-editable="true"
+                                               uib-typeahead="x.RoleName as x.RoleName for x in RoleList | filter:$viewValue | limitTo:10"
+                                               typeahead-on-select="SelectRoleId($item)"
+                                               typeahead-min-length="0" name="Role" autocomplete="off"
+                                               ng-class="{'validation-error': UserManagerForm.Role.$invalid && submitted}" required />
+
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }*@
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Password<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="User.Password" name="Password" placeholder="User Password" ng-pattern="User.ConfirmPassword"
+                                       ng-class="{'validation-error': UserManagerForm.Password.$invalid && submitted}" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Confirm Password<span class="red"> *</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="User.ConfirmPassword" name="ConfirmPassword" placeholder="Confirm Password" ng-pattern="User.Password"
+                                       ng-class="{'validation-error': UserManagerForm.ConfirmPassword.$invalid && submitted}" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+                            <div class="alert-warning col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left" ng-show="UserManagerForm.ConfirmPassword.$error.pattern">
+                                <p style="color:red"> Password not Match </p>
+                            </div>
+                        </div>
+                    </div>
+                    @if (ViewBag.user == "Super Admin")
+                    {
+                        <div class="form-group">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-12 col-xs-12">Company<span class="red"> *</span></label>
+                                <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class='input-group'>
+                                        <input type="text" class="form-control" ng-model="CompanyName" empty-typeahed typeahead-editable="true"
+                                               uib-typeahead="x.CompanyName as x.CompanyName for x in CompanyList | filter:$viewValue | limitTo:10"
+                                               typeahead-on-select="SelectCompanyId($item)"
+                                               typeahead-min-length="0" name="CompanyName" autocomplete="off"
+                                               ng-class="{'validation-error': UserManagerForm.CompanyName.$invalid && submitted}" required />
+
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" ng-hide="User.Id>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" ng-show="User.Id>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/User/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/UserCreateController.js"></script>

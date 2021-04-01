@@ -1,0 +1,90 @@
+﻿/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+input.dynamic {
+    background-color: transparent;
+    border: 0px solid;
+    Height: auto;
+    width: 100%;
+    color: #707478;
+}
+
+.ui-autocomplete {
+		max-height: 100px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+	}
+	/* IE 6 doesn't support max-height
+	 * we use height instead, but this forces the menu to always be this tall
+	 */
+* html .ui-autocomplete {
+    height: 100px;
+}
+.es-input {
+    background-color: white !important;
+    width: 100% !important;
+    border-width: 1px;
+}
+.table-first-row-bold tr:first-child, .table-first-row-bold td:first-child { font-weight: bold }
+.alert {
+    padding: 5px 25px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color:#fff;
+    font-size: 16px;
+}
+.alert.alert-danger {
+    background: #f74646;
+}
+.alert.alert-success {
+    background: #0f6500;
+}
+.alert-dismissable .close, .alert-dismissible .close {
+    top: 0px;
+    right: 0px;
+    color: #fff !important;
+}
+.inner-report {
+    display: none;
+}
+.slimScrollBar.ui-draggable{
+    background-color: aqua!important;
+}

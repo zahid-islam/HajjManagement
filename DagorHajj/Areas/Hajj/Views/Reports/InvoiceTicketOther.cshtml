@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Invoice Ticket Report";
+}
+<style>
+    hr {
+        margin: 0px;
+    }
+</style>
+
+<center><h6 class="print_title shadow-header" style="text-align:center; margin-top:10px;"><b>Invoice</b></h6></center>
+<div style="margin-left:5%; margin-right:5%" class="row" ng-controller="InvoiceTicketOtherController">
+    <div id="loader2" ng-show="loading">
+        <img src="~/Content/images/loading.gif" />
+    </div>
+
+    <div style="margin-top: 10px;" class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+        <table class="table noborders">
+            <tbody>
+                <tr>
+                    <td><b>Invoice No: </b> T{{Ticket.ID}}</td>
+                    <td><b>Agent:</b> {{Ticket.Name}}</td>
+                    <td></td>
+                    <td><b>INVOICE</b></td>
+                </tr>
+                <tr>
+                    <td><b>Booking Date:</b> {{Ticket.IssueDate}}</td>
+                    <td><b>Departure Date:</b> </td>
+                    <td><b>Return Date:</b></td>
+                    <td><b></b></td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div style="margin-top:20px;"></div>
+        <div class="col-md-5 col-xs-5" style="display:inline;border:1px solid;min-height:100px;">
+            <p><b>Sell To:</b></p>
+            <p>{{Ticket.BillTo}}</p>
+            <p>{{Ticket.BillToPersonAddress}}</p>
+        </div>
+        <div class="col-md-1 col-xs-1" style="display:inline;"></div>
+        <div class="col-md-6 col-xs-6" style="display:inline;border:1px solid;float:left;min-height:100px">
+
+            <table class="table-cust">
+                <tr>
+                    <td width="30%"><b>Passenger</b></td>
+                    <td width="30%"></td>
+                    <td width="40%"><b>Phone:</b> {{Ticket.PhoneNo}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">{{Ticket.LastName}}</td>
+                    <td width="30%">{{Ticket.MiddleName}}</td>
+                    <td width="40%">{{Ticket.FirstName}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+        <h5>ITINERAGY</h5>
+        <table class="" style="width:100%;">
+            <thead>
+                <tr>
+                    <th style="text-align:left">Ticket No</th>
+                    <th style="text-align:left">Flight No</th>
+                    @*<th style="text-align:right">Purchase Rate</th>*@
+                    <th style="text-align:right">Total Amount</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>{{Ticket.TicketNo}}</td>
+                <td>{{Ticket.FlightNo}}</td>
+                @*<td align="right">{{Ticket.PurchaseRate}}</td>*@
+                <td align="right">{{Ticket.SellingRate}}</td>
+            </tr>
+            <tr>
+                <td align="right" colspan="4">Paid Amount: {{Ticket.PaidAmount}}</td>
+                @*<td align="right">{{Ticket.PaidAmount}}</td>*@
+            </tr>
+            <tr>
+                <td align="right" colspan="4">Due Amount:  {{Ticket.DueAmount}}</td>
+                @*<td align="right">{{Ticket.DueAmount}}</td>*@
+            </tr>
+        </table>
+        <p style="margin-top:10px;"><b>{{Ticket.Sector}}</b></p>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/Reports/InvoiceTicketOtherController.js"></script>
+}
+

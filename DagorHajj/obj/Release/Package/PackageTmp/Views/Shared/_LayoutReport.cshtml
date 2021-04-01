@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" ng-app="autoSoftErpApp">
+<!--<![endif]-->
+<head lang="en">
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title | Hajjbd Hajj Management Systemm</title>
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/animate.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/style.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/style-responsive.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/default.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/report.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/css/print.css" rel="stylesheet" />
+    <script src="/Content/assets/plugins/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+
+    @*ANGULAR JS*@
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-loading-bar.js"></script>
+    <script src="~/scripts/angular-barcode.js"></script>
+
+    <script type="text/javascript">
+        var app = angular.module("autoSoftErpApp", ["angular-loading-bar", "io-barcode"]);
+    </script>    
+
+    <style type="text/css">        
+        .container {
+            width: 100%;
+        }
+
+        table thead tr th {
+            text-align: center;
+        }
+       
+
+      #table1 th {
+            border: 1px solid black;
+        }
+              #table1 td {
+            border: 1px solid black;
+        }
+
+               .loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid pink;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+        @@-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @@-keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    @RenderSection("headerStyles", false)
+</head>
+<body>
+    @{ 
+        var companyInfo = DagorHajj.Utility.Helper.GetCompanyInfo(Convert.ToInt32(User.Identity.Name));
+        var showHeaderInfo = ViewBag.ShowHeaderInfo == null ? true : Convert.ToBoolean(ViewBag.ShowHeaderInfo);
+        var headerHeight = ViewBag.HeaderHeight == null ? 0 : Convert.ToInt32(ViewBag.HeaderHeight);
+        var showFooterInfo = ViewBag.ShowFooterInfo == null ? true : Convert.ToBoolean(ViewBag.ShowFooterInfo);
+    }
+    <div class="portrait">
+        <div class="container">
+            @*<div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="printer_ref">Report Header Info</p>
+                </div>
+            </div>*@
+            @{ 
+
+            }
+            @if (showHeaderInfo)
+            {
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                        <img style="height:80px;" src="@Url.Content("~/UploadedFiles/" + companyInfo.ImageAttach)" alt="Company Logo" />
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
+                        <p style="font-family:'Times New Roman'; font-weight:bold;font-size:20px;margin-bottom:5px;">@companyInfo.ConpanyName</p>
+                        <p style="font-size:15px;line-height:10px;">@companyInfo.Address</p>
+                        <p style="font-size:15px;line-height:10px;">@companyInfo.ContactNo</p>
+                    </div>
+                </div>
+            }
+            @if (headerHeight > 0)
+            {
+                <div style="height:@(headerHeight)cm;">
+                </div>
+            }
+
+            <div class="loader" id="loader"></div>
+            @RenderBody()
+
+            @if (showFooterInfo)
+            {
+                <div class="clearfix">&nbsp;</div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-left">
+                        <p style="font-size:13px; font-style:italic; text-align:left;">
+                            @{
+                                var generationDate = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
+                            }
+                            <strong>Generation Date:</strong> @generationDate
+                        </p>
+                    </div>
+                </div>
+                                }
+            <div class="clearfix">&nbsp;</div>
+            <div class="row no-print">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> </div>
+                <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2"> <a href="javascript:;" onclick="window.print()" class="btn btn-success pull-right">Print</a> </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+    </div>
+    @RenderSection("scripts", false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#loader").hide();
+        });
+    </script>
+</body>
+</html>

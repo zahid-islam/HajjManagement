@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    .table-bordered {
+        border: 0.5px solid #e59310;
+    }
+</style>
+<div class="content" ng-controller="GroupLeaderCreateCtrl">
+    <h1 class="page-header">Group Leader | Edit</h1>
+    <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+
+    <form name="GroupLeaderForm" ng-submit="GroupLeaderForm.$valid && SaveGroupLeader()" ng-class="{'submitted':submitted}" novalidate>
+        <div class="panel table-bordered ">
+            <div class="panel-body">
+                @*&nbsp;*@
+                <div class="row">
+                    <br />
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Full Name<span class="red">*</span></label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="FullNames" placeholder="Full Name" ng-model="GroupLeader.Name"
+                                       ng-class="{'validation-error': GroupLeaderForm.FullNames.$invalid && submitted}" required />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contact NO</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PhoneNmbr" ng-model="GroupLeader.ContactNo"
+                                       ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/" placeholder="Contact No" />
+                            </div>
+                            <div class="alert-warning col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-right" ng-show="GroupLeaderForm.PhoneNmbr.$error.pattern">
+                                <p style="color:red">Valid phone number required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">National ID</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="NID" ng-model="GroupLeader.NID" placeholder="National ID" ng-pattern="/(^[0-9]{1}((\d){9}|(\d){12}|(\d){16}))$/" />
+                            </div>
+
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Passport No</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="FullName" ng-model="GroupLeader.Passport" placeholder="Passport No" />
+                            </div>
+                            <div class="alert-warning col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left" ng-show="GroupLeaderForm.NID.$error.pattern">
+                                <p style="color:red">Valid National Id Required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Email</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" ng-model="GroupLeader.Email" placeholder="Email" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Contact No(in KSA)</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="ContactNoKSA" ng-model="GroupLeader.ContactNoKSA" placeholder="Contact No (in KSA)" ng-minlength="10" ng-pattern="/[0-9]{1,7}$/" @*ng-pattern="/(^(\+88)?((01|02)){1}[5-9]{1}((\d){8}|(\d){6}))$/"*@ />
+                            </div>
+                            <div class="alert-warning col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-right" ng-show="GroupLeaderForm.ContactNoKSA.$error.pattern">
+                                <p style="color:red">Valid phone number required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">District</label>
+                            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class='input-group'>
+                                    <input type="text" class="form-control" ng-model="GroupLeader.District" empty-typeahed typeahead-editable="true"
+                                           uib-typeahead="x.name as x.name for x in DistrictList | filter:$viewValue | limitTo:10"
+                                           typeahead-min-length="0" autocomplete="off" />
+
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Thana</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Thana" ng-model="GroupLeader.Thana" placeholder="Thana" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Office</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostOffice" ng-model="GroupLeader.PostOffice" placeholder="Post Office" />
+                            </div>
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Post Code</label>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="PostCode" ng-model="GroupLeader.PostCode" placeholder="Post Code" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12"> Address 1</label>
+                            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Address1" ng-model="GroupLeader.Address1" placeholder="Address 1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12"> Address 2</label>
+                            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Address2" ng-model="GroupLeader.Address2" placeholder="Address 2" />
+                            </div>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">PassPort Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="passportFile" name="files" accept="image/*"
+                                           onchange="angular.element(this).scope().SelectPassportFile(this.files), readURL(this);" />
+                                </span>
+                            </div>
+                            <span ng-show="GroupLeader.PassportAttach != null"><a class="btn btn-default" target="_blank" style="color:green" href="~/UploadedFiles/{{GroupLeader.PassportAttach}}">{{GroupLeader.PassportAttach}}</a></span>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">File Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="file2" name="files" @*accept="image/*"*@
+                                           onchange="angular.element(this).scope().SelectFile(this.files), readURL(this);" />
+                                </span>
+                            </div>
+                            <span ng-show="GroupLeader.NIDAttach != null"><a class="btn btn-default" target="_blank" style="color:green" href="~/UploadedFiles/{{GroupLeader.NIDAttach}}">{{GroupLeader.NIDAttach}}</a></span>
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Image Attach</label>
+                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-plus"></i><span>Add file</span>
+                                    <input type="file" id="imageFile" name="files" accept="image/*"
+                                           onchange="angular.element(this).scope().SelectImageFile(this.files), readURL(this);" />
+                                </span>
+                            </div>
+                            <span ng-show="GroupLeader.ImageAttach != null"><a class="btn btn-default" target="_blank" style="color:green" href="~/UploadedFiles/{{GroupLeader.ImageAttach}}">{{GroupLeader.ImageAttach}}</a></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-hide="GroupLeader.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Save" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="GroupLeader.ID>0">
+                            <input type="submit" style="margin-left:2px" class="btn btn-success pull-right" ng-click="submitted = true" value="Update" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="/Hajj/GroupLeader/Index">
+            <i class="fa fa-arrow-circle-left">
+            </i>Back to previous page
+        </a>
+    </p>
+</div>
+<script src="~/Areas/Hajj/Scripts/GroupLeaderCreateController.js"></script>

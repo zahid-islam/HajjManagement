@@ -1,0 +1,21 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+<div class="content">
+    <div class="row">
+        <div id="page-container">
+            @if (ViewBag.Success)
+            {
+                <h2 class="text-success">Query updated successfully...</h2>
+            }
+            else
+            {
+                <h1 class="text-danger">Error.</h1>
+                <h2 class="text-danger">An error occurred while processing your request.</h2>
+                <p>@ViewBag.ErrorMessage</p>
+            }
+        </div>
+    </div>
+</div>

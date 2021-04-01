@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Supplier Ledger Report";
+}
+<style>
+    hr {
+        margin: 0px;
+    }
+</style>
+
+<center><h6 class="print_title shadow-header" style="text-align:center; margin-top:10px;">Supplier Ledger Report</h6></center>
+<div class="row" ng-controller="SupplierLedgerReportController">
+    <div id="loader2" ng-show="loading">
+        <img src="~/Content/images/loading.gif" />
+    </div>
+    <center class="shadow-header"><h4 style="text-align:center; margin-top:10px;">From: {{date.fromDate}}  &nbsp;    To: {{date.toDate}} </h4></center>
+
+    <div style="margin-top: 10px;" class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+        <h5>Party Name: {{PartyName}}</h5>
+        <table class="table table-responsive table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>SN.</th>
+                    <th>Date</th>
+                    <th>Payment For</th>
+                    <th style="text-align:right">Payable Amt.</th>
+                    <th style="text-align:right">Paid Amt.</th>
+                    <th style="text-align:right">Balance</th>
+                </tr>
+                <tr ng-repeat="x in SupplierLedger" style="border: 1px solid black;" ng-init="SetGrandTotals(x);">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.PaymentDate}}</td>
+                    <td>{{x.PaymentFor}}</td>
+                    <td align="right">{{x.PayableAmount}}</td>
+                    <td align="right">{{x.PaidAmount}}</td>
+                    <td align="right">{{x.Balance}}</td>
+                </tr>
+                <tr>
+                    <td align="right" colspan="3">Total</td>
+                    <td align="right"><b>{{PayableAmountTotal}}</b></td>
+                    <td align="right"><b>{{PaidAmountTotal}}</b></td>
+                    <td align="right"><b>{{PayableAmountTotal - PaidAmountTotal}}</b></td>
+                </tr>
+
+            </thead>
+        </table>
+
+
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/SupplierLedgerReportController.js"></script>
+}
+

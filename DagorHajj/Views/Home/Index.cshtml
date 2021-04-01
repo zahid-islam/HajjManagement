@@ -1,0 +1,341 @@
+﻿@{
+
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_ApplicationLayout.cshtml";
+}
+<style>
+    .row span {
+        color: black;
+        font-weight: bold;
+    }
+    .backColorRight {
+        background-color: white;
+    }
+    .backColorLeft {
+        background-color: #15bb9c
+    }
+    .MarginBottom {
+        margin-bottom: 5px
+    }
+</style>
+<div class="content" ng-controller="DashboardController">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="widget widget-stats bg-green">
+                <div class="stats-icon"><i class="fa fa-briefcase"></i></div>
+                <div class="stats-info">
+                    <p style="border-bottom:1px solid #fff; padding-bottom:5px; margin-bottom:5px;">Hajj</p>
+
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Total Prilgrims:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.totalPilgrimsHajj}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Last Year ({{DashBoardInfo.LastYear}}):
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.lastYearHpilgrm}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Current Year ({{DashBoardInfo.Year}}):
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.curentYearHpilgrm}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Next Year ({{DashBoardInfo.NextYear}}):
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.nextYearHpilgrm}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="widget widget-stats bg-green" style="min-height: 110px!important">
+                <div class="stats-icon"><i class="fa fa-briefcase"></i></div>
+                <div class="stats-info">
+                    <p style="border-bottom:1px solid #fff; padding-bottom:5px; margin-bottom:5px;">Status</p>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Pre-registered Pilgrims:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.preRegisteredHajj}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Registered Pilgrims:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.registeredHajj}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="widget widget-stats bg-green">
+                <div class="stats-icon"><i class="fa fa-briefcase"></i></div>
+                <div class="stats-info">
+                    <p style="border-bottom:1px solid #fff; padding-bottom:5px; margin-bottom:5px;">Ticket</p>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Purchasing Amount:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Previous Month:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                1st Half: {{DashBoardInfo.lastMont1stHalf}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12">
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                2nd Half: {{DashBoardInfo.lastMont2stHalf}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Current Month:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                1st Half: {{DashBoardInfo.curMont1stHalf}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12">
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                2nd Half: {{DashBoardInfo.curMont2stHalf}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="widget widget-stats bg-green">
+                <div class="stats-icon"><i class="fa fa-paint-brush"></i></div>
+                <div class="stats-info">
+                    <p style="border-bottom:1px solid #fff; padding-bottom:5px; margin-bottom:5px;">Umrah</p>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Total Prilgrims:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.totalPilgrimsUmrah}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Last Year ({{DashBoardInfo.LastYear}}):
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.lastYearUpilgrm}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Current Year ({{DashBoardInfo.Year}}):
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.curentYearUpilgrm}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="widget widget-stats bg-green">
+                <div class="stats-icon"><i class="fa fa-paint-brush"></i></div>
+                <div class="stats-info">
+                    <p style="border-bottom:1px solid #fff; padding-bottom:5px; margin-bottom:5px;">Status</p>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Send to MOFAS:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.sendToMofaUmr}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                MOFA Approved:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.mofaApprovUmr}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Visa Print:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.visaPrintUmr}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Inside KSA:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.insideKsaUmr}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Outside KSA:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.outsideKsaUmr}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 MarginBottom">
+                        <div class="col-md-6 col-sm-12 backColorLeft">
+                            <span>
+                                Visa Cancelled:
+                            </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 backColorRight">
+                            <span>
+                                {{DashBoardInfo.visaCancelUmr}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-inverse" data-sortable-id="index-10">
+                <div class="panel-heading" style="background: #4c5a75;">
+                    <h4 class="panel-title">Calendar</h4>
+                </div>
+                <div class="panel-body">
+                    <div id="datepicker-inline" class="datepicker-full-width">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-inverse">
+                <div class="panel-heading" style="background: #4c5a75;">
+                    <h4 class="panel-title">Today's My Schedule</h4>
+                </div>
+                <div class="list-group"> <a href="#" class="list-group-item text-ellipsis"><span class="badge badge-success">9:00 am</span> Sales Reporting </a> <a href="#" class="list-group-item text-ellipsis"><span class="badge badge-primary">2:45 pm</span> Have a meeting with sales team </a> <a href="#" class="list-group-item text-ellipsis"><span class="badge badge-success">9:00 am</span> Sales Reporting </a> <a href="#" class="list-group-item text-ellipsis"><span class="badge badge-primary">2:45 pm</span> Have a meeting with sales team </a> <a href="#" class="list-group-item text-ellipsis"><span class="badge badge-success">9:00 am</span> Sales Reporting </a> </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-inverse" data-sortable-id="index-10">
+                <div class="panel-heading" style="background: #4c5a75;">
+                    <h4 class="panel-title">Important Links</h4>
+                </div>
+                <div class="panel-body">
+                    <ul style="margin-left:10px; padding-left:0;">
+                        <li><a href="#">Test Link</a></li>
+                        <li><a href="#">Test Link</a></li>
+                        <li><a href="#">Test Link</a></li>
+                        <li><a href="#">Test Link</a></li>
+                        <li><a href="#">Test Link</a></li>
+                        <li><a href="#">Test Link</a></li>
+                        <li><a href="#">Test Link</a></li>
+                        <li><a href="#">Test Link</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Areas/Hajj/Scripts/DashboardController.js"></script>
+}

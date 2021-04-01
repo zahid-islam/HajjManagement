@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Edit - System Admin User";
+}
+
+@section HeaderStyles
+{
+    <style>
+        th {
+            text-align: center;
+        }
+        input[type="checkbox"] {
+            width: 25px; /*Desired width*/
+            height: 25px; /*Desired height*/
+            cursor: pointer;
+        }
+    </style>
+}
+
+<div class="content" ng-controller="AdminSystemUserController" ng-init="initEdit()">
+    <h1 class="page-header">System Admin User - Edit</h1>
+    @*<div class="row">
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Employee ID   <span class="red">*</span></label>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <input type="text" class="form-control" data-parsley-required="true" />
+            </div>
+            <label class="col-lg-2 col-md-2 col-sm-12 col-xs-12">Employee Name </label>
+            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <input type="text" class="form-control" readonly ng-model="Employee.FullName" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Designation </label>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <input type="text" class="form-control" readonly ng-model="Employee.Designation" />
+            </div>
+            <label class="col-lg-2 col-md-2 col-sm-12 col-xs-12">Department </label>
+            <div class="control-label col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <input type="text" class="form-control" readonly ng-model="Employee.Department" />
+            </div>
+        </div>
+    </div>*@
+    <div class="panel">
+        <div class="panel-body">
+            <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="3000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)"><p ng-bind="alert.msg"></p></div>
+            <form data-parsley-validate="true" name="demo-form">
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">User ID   <span class="red">*</span></label>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <input type="text" class="form-control" ng-model="user.Email" readonly />
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Password <span class="red">*</span></label>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <input type="password" class="form-control" ng-model="user.Password" data-parsley-required="true" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">Password Repeat <span class="red">*</span></label>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <input type="password" class="form-control" ng-model="user.RepeatPassword" data-parsley-required="true" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-12 col-xs-12">All Modules</label>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <input type="checkbox" class="form-control" ng-change="checkAllModules()" ng-model="allModules" />
+                    </div>
+                </div>
+                <h5>USER PRIVILEGES:</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Module</th>
+                                <th>Menus</th>
+                                <th>Listing Page</th>
+                                <th>Add New</th>
+                                <th>Edit</th>
+                                <th>Report View</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="val in user.modulePrivileges">
+                            <tr>
+                                <td rowspan="{{val.Count + 1}}" class="text-center"><input type="checkbox" ng-change="checkSingleModule(val)" ng-model="val.selectedModule"> {{val.ModuleName}}</td>
+                            </tr>
+                            <tr ng-repeat="privilege in val.MenuPrivileges">
+                                <td><input type="checkbox" ng-model="privilege.selectedMenu" ng-change="checkSingleMenu(privilege)"> {{privilege.Menu}}</td>
+                                <td class="text-center"><input type="checkbox" ng-model="privilege.ListView"></td>
+                                <td class="text-center"><input type="checkbox" ng-model="privilege.Create"></td>
+                                <td class="text-center"><input type="checkbox" ng-model="privilege.Edit"></td>                                
+                                <td class="text-center"><input type="checkbox" ng-model="privilege.ReportPreview"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                            <input type="button" class="btn btn-success pull-right" ng-click="UpdateUserPrivilege()" id="submit" value="Submit" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="content2">
+    <p>
+        <a class="btn btn-success" href="javascript:history.back(-1);"><i class="fa fa-arrow-circle-left"></i> Back to previous page</a>
+    </p>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Areas/Hajj/NgController/AdminSystemUserController.js"></script>
+}

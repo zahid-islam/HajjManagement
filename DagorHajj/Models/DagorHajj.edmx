@@ -1,0 +1,2185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DagorHajjModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminSystemUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserStatus" Type="bit" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="AllModule" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AdminSystemUserDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminSystemUserId" Type="int" Nullable="false" />
+          <Property Name="ControllerName" Type="varchar" MaxLength="50" />
+          <Property Name="ModuleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModuleStatus" Type="bit" Nullable="false" />
+          <Property Name="Menu" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Create" Type="bit" Nullable="false" />
+          <Property Name="Edit" Type="bit" Nullable="false" />
+          <Property Name="Delete" Type="bit" Nullable="false" />
+          <Property Name="ListView" Type="bit" Nullable="false" />
+          <Property Name="ReportPreview" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HajjYear" Type="int" />
+          <Property Name="BookingDate" Type="datetime" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="ChequeNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChequeDate" Type="datetime" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Branch" Type="nvarchar" MaxLength="100" />
+          <Property Name="UmrahID" Type="int" />
+          <Property Name="PaymentFor" Type="nvarchar" MaxLength="20" />
+          <Property Name="GroupLeaderID" Type="int" />
+          <Property Name="PaymentType" Type="nvarchar" MaxLength="51" />
+          <Property Name="HajjiID" Type="int" />
+        </EntityType>
+        <EntityType Name="CompanyProfile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConpanyName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="14" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="OwnersName" Type="nvarchar" MaxLength="150" />
+          <Property Name="OwnersContactNo" Type="nvarchar" MaxLength="14" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="LicenseNo" Type="varchar" MaxLength="150" />
+          <Property Name="Designation" Type="varchar" MaxLength="250" />
+          <Property Name="ImageAttach" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HajjiID" Type="int" Nullable="false" />
+          <Property Name="GroupLeaderID" Type="int" Nullable="false" />
+          <Property Name="ContractAmount" Type="int" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GroupLeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="50" />
+          <Property Name="NID" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassportAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="NIDAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="ImageAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="200" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" />
+          <Property Name="Thana" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostOffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="ContactNoKSA" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Hajji">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HajjID" Type="nvarchar" MaxLength="50" />
+          <Property Name="DoB" Type="datetime" />
+          <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="150" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="150" />
+          <Property Name="MotherName" Type="nvarchar" MaxLength="150" />
+          <Property Name="SpouseName" Type="nvarchar" MaxLength="150" />
+          <Property Name="PresentAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="PermanentAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="SpouseContactNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="SerialNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="TrackingNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PassportNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PassportExpiryDate" Type="datetime" />
+          <Property Name="PassportIssueDate" Type="datetime" />
+          <Property Name="PlaceOfPassportIssue" Type="nvarchar" MaxLength="200" />
+          <Property Name="NID" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassportAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="NIDAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="ImageAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="PID" Type="nvarchar" MaxLength="100" />
+          <Property Name="InitialName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmergencyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmergencyContactNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupLeaderID" Type="int" />
+          <Property Name="ContractAmount" Type="int" />
+          <Property Name="PerformingHajj" Type="int" />
+          <Property Name="MuharramName" Type="nvarchar" MaxLength="150" />
+          <Property Name="LastHajjYear" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" />
+          <Property Name="Thana" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostOffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="MuharramRelationID" Type="int" />
+          <Property Name="PermanentDistrict" Type="nvarchar" MaxLength="50" />
+          <Property Name="PermanentThana" Type="nvarchar" MaxLength="50" />
+          <Property Name="PermanentPostOffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="PermanentPostCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HajjiStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MuharramRelation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RelationType" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Other">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupLeaderID" Type="int" />
+          <Property Name="InitialName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="150" />
+          <Property Name="PurchaseRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SellingRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="PassportNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateOfExpiry" Type="datetime" />
+          <Property Name="DoB" Type="datetime" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="SellTo" Type="nvarchar" MaxLength="100" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IssueDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupLeaderID" Type="int" Nullable="false" />
+          <Property Name="HajjiID" Type="int" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="ChequeNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChequeDate" Type="datetime" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Branch" Type="nvarchar" MaxLength="100" />
+          <Property Name="UmrahID" Type="int" />
+          <Property Name="PaymentFor" Type="nvarchar" MaxLength="20" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusChangableDate" Type="datetime" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+          <Property Name="TicketId" Type="int" />
+          <Property Name="OtherId" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageName" Type="varchar" MaxLength="150" />
+          <Property Name="PackageRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HajjLevy" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LevyYear" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="EditedAt" Type="datetime" />
+          <Property Name="EditedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="100" />
+          <Property Name="PermanenttAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="PresentAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="EditedBy" Type="int" />
+          <Property Name="EditedAt" Type="datetime" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="ChequeNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChequeDate" Type="datetime" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Branch" Type="nvarchar" MaxLength="100" />
+          <Property Name="PaymentFor" Type="nvarchar" MaxLength="20" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusChangableDate" Type="datetime" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupLeaderID" Type="int" Nullable="false" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="FlightDate" Type="datetime" />
+          <Property Name="Carier" Type="nvarchar" MaxLength="150" />
+          <Property Name="FlightNo" Type="nvarchar" MaxLength="200" />
+          <Property Name="TicketNo" Type="nvarchar" MaxLength="200" />
+          <Property Name="AirlinesPNR" Type="nvarchar" MaxLength="150" />
+          <Property Name="GdsPNR" Type="nvarchar" MaxLength="150" />
+          <Property Name="InitialName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PurchaseRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SellingRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="PassportNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateOfExpiry" Type="datetime" />
+          <Property Name="DoB" Type="datetime" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="SellTo" Type="nvarchar" MaxLength="100" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TicketSector">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketID" Type="int" />
+          <Property Name="Sector" Type="nvarchar" MaxLength="200" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Umrah">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UmrahID" Type="nvarchar" MaxLength="50" />
+          <Property Name="DoB" Type="datetime" />
+          <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="150" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="150" />
+          <Property Name="MotherName" Type="nvarchar" MaxLength="150" />
+          <Property Name="SpouseName" Type="nvarchar" MaxLength="150" />
+          <Property Name="PresentAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="PermanentAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="SpouseContactNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PassportNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PassportExpiryDate" Type="datetime" />
+          <Property Name="PassportIssueDate" Type="datetime" />
+          <Property Name="PlaceOfPassportIssue" Type="nvarchar" MaxLength="200" />
+          <Property Name="NID" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassportAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="NIDAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="ImageAttach" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="AddedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="MuharramName" Type="nvarchar" MaxLength="150" />
+          <Property Name="InitialName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupLeaderID" Type="int" />
+          <Property Name="LastUmrahYear" Type="int" />
+          <Property Name="ContractAmount" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" />
+          <Property Name="Thana" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostOffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="DepartureDate" Type="datetime" />
+          <Property Name="FlightArrivalDate" Type="datetime" />
+          <Property Name="MuharramRelationID" Type="int" />
+          <Property Name="PermanentDistrict" Type="nvarchar" MaxLength="50" />
+          <Property Name="PermanentThana" Type="nvarchar" MaxLength="50" />
+          <Property Name="PermanentPostOffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="PermanentPostCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="PurchaseAmount" Type="int" />
+        </EntityType>
+        <EntityType Name="UmrahStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RoleId" Type="smallint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastLoggedInDateTime" Type="datetime" />
+          <Property Name="AllowedNoOfLogins" Type="smallint" Nullable="false" />
+          <Property Name="LoginCount" Type="smallint" Nullable="false" />
+          <Property Name="AllowedLoginHours" Type="smallint" Nullable="false" />
+          <Property Name="AllowedLoginMinutes" Type="smallint" Nullable="false" />
+          <Property Name="ActiveBranchId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AdminSystemUserDetails_AdminSystemUser">
+          <End Role="AdminSystemUser" Type="Self.AdminSystemUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminSystemUserDetails" Type="Self.AdminSystemUserDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminSystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminSystemUserDetails">
+              <PropertyRef Name="AdminSystemUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BookingGroupLeaderId">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BookingHajjiID">
+          <End Role="Hajji" Type="Self.Hajji" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hajji">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="HajjiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BookingUmrahId">
+          <End Role="Umrah" Type="Self.Umrah" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Umrah">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="UmrahID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_GroupLeader">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Hajji">
+          <End Role="Hajji" Type="Self.Hajji" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hajji">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="HajjiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Gl_groupLeaderID">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Gl_HajjiGroupLeaderId">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="0..1" />
+          <End Role="Hajji" Type="Self.Hajji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Hajji">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Gl_UmrahGroupLeaderId">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="0..1" />
+          <End Role="Umrah" Type="Self.Umrah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Umrah">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hajji_MuharramRelationId">
+          <End Role="MuharramRelation" Type="Self.MuharramRelation" Multiplicity="0..1" />
+          <End Role="Hajji" Type="Self.Hajji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MuharramRelation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Hajji">
+              <PropertyRef Name="MuharramRelationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Hajji_Status">
+          <End Role="HajjiStatus" Type="Self.HajjiStatus" Multiplicity="0..1" />
+          <End Role="Hajji" Type="Self.Hajji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HajjiStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Hajji">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_GroupLeaderId">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="0..1" />
+          <End Role="Other" Type="Self.Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Other">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_SupplierID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Other" Type="Self.Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Other">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_Ticket">
+          <End Role="Other" Type="Self.Other" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Other">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="OtherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_GroupLeader">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Hajji">
+          <End Role="Hajji" Type="Self.Hajji" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hajji">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="HajjiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PaymentUmrahId">
+          <End Role="Umrah" Type="Self.Umrah" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Umrah">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UmrahID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierPayment_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="SupplierPayment" Type="Self.SupplierPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupplierPayment">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_SupplierID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketSector_TicketID">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="TicketSector" Type="Self.TicketSector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketSector">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Umrah_MuharramRelationId">
+          <End Role="MuharramRelation" Type="Self.MuharramRelation" Multiplicity="0..1" />
+          <End Role="Umrah" Type="Self.Umrah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MuharramRelation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Umrah">
+              <PropertyRef Name="MuharramRelationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Umrah_UmrahStatus">
+          <End Role="UmrahStatus" Type="Self.UmrahStatus" Multiplicity="0..1" />
+          <End Role="Umrah" Type="Self.Umrah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UmrahStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Umrah">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DagorHajjModelStoreContainer">
+          <EntitySet Name="AdminSystemUser" EntityType="Self.AdminSystemUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminSystemUserDetails" EntityType="Self.AdminSystemUserDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyProfile" EntityType="Self.CompanyProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupLeader" EntityType="Self.GroupLeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hajji" EntityType="Self.Hajji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HajjiStatus" EntityType="Self.HajjiStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MuharramRelation" EntityType="Self.MuharramRelation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Other" EntityType="Self.Other" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierPayment" EntityType="Self.SupplierPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketSector" EntityType="Self.TicketSector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Umrah" EntityType="Self.Umrah" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UmrahStatus" EntityType="Self.UmrahStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdminSystemUserDetails_AdminSystemUser" Association="Self.FK_AdminSystemUserDetails_AdminSystemUser">
+            <End Role="AdminSystemUser" EntitySet="AdminSystemUser" />
+            <End Role="AdminSystemUserDetails" EntitySet="AdminSystemUserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BookingGroupLeaderId" Association="Self.fk_BookingGroupLeaderId">
+            <End Role="GroupLeader" EntitySet="GroupLeader" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BookingHajjiID" Association="Self.fk_BookingHajjiID">
+            <End Role="Hajji" EntitySet="Hajji" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BookingUmrahId" Association="Self.fk_BookingUmrahId">
+            <End Role="Umrah" EntitySet="Umrah" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_GroupLeader" Association="Self.FK_Contract_GroupLeader">
+            <End Role="GroupLeader" EntitySet="GroupLeader" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Hajji" Association="Self.FK_Contract_Hajji">
+            <End Role="Hajji" EntitySet="Hajji" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gl_groupLeaderID" Association="Self.fk_Gl_groupLeaderID">
+            <End Role="GroupLeader" EntitySet="GroupLeader" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gl_HajjiGroupLeaderId" Association="Self.fk_Gl_HajjiGroupLeaderId">
+            <End Role="GroupLeader" EntitySet="GroupLeader" />
+            <End Role="Hajji" EntitySet="Hajji" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gl_UmrahGroupLeaderId" Association="Self.fk_Gl_UmrahGroupLeaderId">
+            <End Role="GroupLeader" EntitySet="GroupLeader" />
+            <End Role="Umrah" EntitySet="Umrah" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hajji_MuharramRelationId" Association="Self.FK_Hajji_MuharramRelationId">
+            <End Role="MuharramRelation" EntitySet="MuharramRelation" />
+            <End Role="Hajji" EntitySet="Hajji" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Hajji_Status" Association="Self.fk_Hajji_Status">
+            <End Role="HajjiStatus" EntitySet="HajjiStatus" />
+            <End Role="Hajji" EntitySet="Hajji" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_GroupLeaderId" Association="Self.FK_Other_GroupLeaderId">
+            <End Role="GroupLeader" EntitySet="GroupLeader" />
+            <End Role="Other" EntitySet="Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_SupplierID" Association="Self.FK_Other_SupplierID">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Other" EntitySet="Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_Ticket" Association="Self.FK_Other_Ticket">
+            <End Role="Other" EntitySet="Other" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_GroupLeader" Association="Self.FK_Payment_GroupLeader">
+            <End Role="GroupLeader" EntitySet="GroupLeader" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Hajji" Association="Self.FK_Payment_Hajji">
+            <End Role="Hajji" EntitySet="Hajji" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Ticket" Association="Self.FK_Payment_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PaymentUmrahId" Association="Self.fk_PaymentUmrahId">
+            <End Role="Umrah" EntitySet="Umrah" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierPayment_Supplier" Association="Self.FK_SupplierPayment_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="SupplierPayment" EntitySet="SupplierPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_SupplierID" Association="Self.FK_Ticket_SupplierID">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketSector_TicketID" Association="Self.FK_TicketSector_TicketID">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="TicketSector" EntitySet="TicketSector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Umrah_MuharramRelationId" Association="Self.FK_Umrah_MuharramRelationId">
+            <End Role="MuharramRelation" EntitySet="MuharramRelation" />
+            <End Role="Umrah" EntitySet="Umrah" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Umrah_UmrahStatus" Association="Self.fk_Umrah_UmrahStatus">
+            <End Role="UmrahStatus" EntitySet="UmrahStatus" />
+            <End Role="Umrah" EntitySet="Umrah" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DagorHajjModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminSystemUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserStatus" Type="Boolean" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <Property Name="AllModule" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AdminSystemUserDetails" Relationship="Self.FK_AdminSystemUserDetails_AdminSystemUser" FromRole="AdminSystemUser" ToRole="AdminSystemUserDetails" />
+        </EntityType>
+        <EntityType Name="AdminSystemUserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminSystemUserId" Type="Int32" Nullable="false" />
+          <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModuleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModuleStatus" Type="Boolean" Nullable="false" />
+          <Property Name="Menu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Create" Type="Boolean" Nullable="false" />
+          <Property Name="Edit" Type="Boolean" Nullable="false" />
+          <Property Name="Delete" Type="Boolean" Nullable="false" />
+          <Property Name="ListView" Type="Boolean" Nullable="false" />
+          <Property Name="ReportPreview" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AdminSystemUser" Relationship="Self.FK_AdminSystemUserDetails_AdminSystemUser" FromRole="AdminSystemUserDetails" ToRole="AdminSystemUser" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HajjYear" Type="Int32" />
+          <Property Name="BookingDate" Type="DateTime" Precision="3" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="ChequeNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeDate" Type="DateTime" Precision="3" />
+          <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Branch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UmrahID" Type="Int32" />
+          <Property Name="PaymentFor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GroupLeaderID" Type="Int32" />
+          <Property Name="PaymentType" Type="String" MaxLength="51" FixedLength="false" Unicode="true" />
+          <Property Name="HajjiID" Type="Int32" />
+          <NavigationProperty Name="GroupLeader" Relationship="Self.fk_BookingGroupLeaderId" FromRole="Booking" ToRole="GroupLeader" />
+          <NavigationProperty Name="Hajji" Relationship="DagorHajjModel.fk_BookingHajjiID" FromRole="Booking" ToRole="Hajji" />
+          <NavigationProperty Name="Umrah" Relationship="DagorHajjModel.fk_BookingUmrahId" FromRole="Booking" ToRole="Umrah" />
+        </EntityType>
+        <EntityType Name="CompanyProfile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConpanyName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OwnersName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="OwnersContactNo" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="LicenseNo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Designation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ImageAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HajjiID" Type="Int32" Nullable="false" />
+          <Property Name="GroupLeaderID" Type="Int32" Nullable="false" />
+          <Property Name="ContractAmount" Type="Int32" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GroupLeader" Relationship="Self.FK_Contract_GroupLeader" FromRole="Contract" ToRole="GroupLeader" />
+          <NavigationProperty Name="Hajji" Relationship="DagorHajjModel.FK_Contract_Hajji" FromRole="Contract" ToRole="Hajji" />
+        </EntityType>
+        <EntityType Name="GroupLeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassportAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NIDAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ImageAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Thana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostOffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNoKSA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bookings" Relationship="Self.fk_BookingGroupLeaderId" FromRole="GroupLeader" ToRole="Booking" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contract_GroupLeader" FromRole="GroupLeader" ToRole="Contract" />
+          <NavigationProperty Name="Tickets" Relationship="Self.fk_Gl_groupLeaderID" FromRole="GroupLeader" ToRole="Ticket" />
+          <NavigationProperty Name="Other" Relationship="Self.FK_Other_GroupLeaderId" FromRole="GroupLeader" ToRole="Other" />
+          <NavigationProperty Name="Hajjis" Relationship="DagorHajjModel.fk_Gl_HajjiGroupLeaderId" FromRole="GroupLeader" ToRole="Hajji" />
+          <NavigationProperty Name="Payments" Relationship="DagorHajjModel.FK_Payment_GroupLeader" FromRole="GroupLeader" ToRole="Payment" />
+          <NavigationProperty Name="Umrahs" Relationship="DagorHajjModel.fk_Gl_UmrahGroupLeaderId" FromRole="GroupLeader" ToRole="Umrah" />
+        </EntityType>
+        <EntityType Name="HajjiStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Hajjis" Relationship="DagorHajjModel.fk_Hajji_Status" FromRole="HajjiStatu" ToRole="Hajji" />
+        </EntityType>
+        <EntityType Name="MuharramRelation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RelationType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Hajjis" Relationship="DagorHajjModel.FK_Hajji_MuharramRelationId" FromRole="MuharramRelation" ToRole="Hajji" />
+          <NavigationProperty Name="Umrahs" Relationship="DagorHajjModel.FK_Umrah_MuharramRelationId" FromRole="MuharramRelation" ToRole="Umrah" />
+        </EntityType>
+        <EntityType Name="Other">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupLeaderID" Type="Int32" />
+          <Property Name="InitialName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SellingRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="PassportNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfExpiry" Type="DateTime" Precision="3" />
+          <Property Name="DoB" Type="DateTime" Precision="3" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="SellTo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IssueDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GroupLeader" Relationship="Self.FK_Other_GroupLeaderId" FromRole="Other" ToRole="GroupLeader" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Other_SupplierID" FromRole="Other" ToRole="Supplier" />
+          <NavigationProperty Name="Payments" Relationship="DagorHajjModel.FK_Other_Ticket" FromRole="Other" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PackageRate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HajjLevy" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LevyYear" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="EditedAt" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PermanenttAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PresentAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="Int32" />
+          <Property Name="EditedAt" Type="DateTime" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Other" Relationship="Self.FK_Other_SupplierID" FromRole="Supplier" ToRole="Other" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_SupplierID" FromRole="Supplier" ToRole="Ticket" />
+          <NavigationProperty Name="SupplierPayments" Relationship="DagorHajjModel.FK_SupplierPayment_Supplier" FromRole="Supplier" ToRole="SupplierPayment" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupLeaderID" Type="Int32" Nullable="false" />
+          <Property Name="IssueDate" Type="DateTime" Precision="3" />
+          <Property Name="FlightDate" Type="DateTime" Precision="3" />
+          <Property Name="Carier" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FlightNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TicketNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AirlinesPNR" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="GdsPNR" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="InitialName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SellingRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="PassportNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfExpiry" Type="DateTime" Precision="3" />
+          <Property Name="DoB" Type="DateTime" Precision="3" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="SellTo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="GroupLeader" Relationship="Self.fk_Gl_groupLeaderID" FromRole="Ticket" ToRole="GroupLeader" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Ticket_SupplierID" FromRole="Ticket" ToRole="Supplier" />
+          <NavigationProperty Name="TicketSectors" Relationship="Self.FK_TicketSector_TicketID" FromRole="Ticket" ToRole="TicketSector" />
+          <NavigationProperty Name="Payments" Relationship="DagorHajjModel.FK_Payment_Ticket" FromRole="Ticket" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="TicketSector">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketID" Type="Int32" />
+          <Property Name="Sector" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketSector_TicketID" FromRole="TicketSector" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UmrahStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Umrahs" Relationship="DagorHajjModel.fk_Umrah_UmrahStatus" FromRole="UmrahStatu" ToRole="Umrah" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int16" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastLoggedInDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AllowedNoOfLogins" Type="Int16" Nullable="false" />
+          <Property Name="LoginCount" Type="Int16" Nullable="false" />
+          <Property Name="AllowedLoginHours" Type="Int16" Nullable="false" />
+          <Property Name="AllowedLoginMinutes" Type="Int16" Nullable="false" />
+          <Property Name="ActiveBranchId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_AdminSystemUserDetails_AdminSystemUser">
+          <End Role="AdminSystemUser" Type="Self.AdminSystemUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdminSystemUserDetails" Type="Self.AdminSystemUserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminSystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminSystemUserDetails">
+              <PropertyRef Name="AdminSystemUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BookingGroupLeaderId">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_GroupLeader">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Gl_groupLeaderID">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_GroupLeaderId">
+          <End Role="GroupLeader" Type="Self.GroupLeader" Multiplicity="0..1" />
+          <End Role="Other" Type="Self.Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Other">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_SupplierID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Other" Type="Self.Other" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Other">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_SupplierID">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketSector_TicketID">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="TicketSector" Type="Self.TicketSector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketSector">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DagorHajjEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminSystemUsers" EntityType="Self.AdminSystemUser" />
+          <EntitySet Name="AdminSystemUserDetails" EntityType="Self.AdminSystemUserDetail" />
+          <EntitySet Name="Bookings" EntityType="Self.Booking" />
+          <EntitySet Name="CompanyProfiles" EntityType="Self.CompanyProfile" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="GroupLeaders" EntityType="Self.GroupLeader" />
+          <EntitySet Name="HajjiStatus" EntityType="Self.HajjiStatu" />
+          <EntitySet Name="MuharramRelations" EntityType="Self.MuharramRelation" />
+          <EntitySet Name="Other" EntityType="Self.Other" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <EntitySet Name="TicketSectors" EntityType="Self.TicketSector" />
+          <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
+          <EntitySet Name="UmrahStatus" EntityType="Self.UmrahStatu" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_AdminSystemUserDetails_AdminSystemUser" Association="Self.FK_AdminSystemUserDetails_AdminSystemUser">
+            <End Role="AdminSystemUser" EntitySet="AdminSystemUsers" />
+            <End Role="AdminSystemUserDetails" EntitySet="AdminSystemUserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BookingGroupLeaderId" Association="Self.fk_BookingGroupLeaderId">
+            <End Role="GroupLeader" EntitySet="GroupLeaders" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_GroupLeader" Association="Self.FK_Contract_GroupLeader">
+            <End Role="GroupLeader" EntitySet="GroupLeaders" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gl_groupLeaderID" Association="Self.fk_Gl_groupLeaderID">
+            <End Role="GroupLeader" EntitySet="GroupLeaders" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_GroupLeaderId" Association="Self.FK_Other_GroupLeaderId">
+            <End Role="GroupLeader" EntitySet="GroupLeaders" />
+            <End Role="Other" EntitySet="Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_SupplierID" Association="Self.FK_Other_SupplierID">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Other" EntitySet="Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_SupplierID" Association="Self.FK_Ticket_SupplierID">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketSector_TicketID" Association="Self.FK_TicketSector_TicketID">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="TicketSector" EntitySet="TicketSectors" />
+          </AssociationSet>
+          <EntitySet Name="Hajjis" EntityType="DagorHajjModel.Hajji" />
+          <AssociationSet Name="fk_BookingHajjiID" Association="DagorHajjModel.fk_BookingHajjiID">
+            <End Role="Hajji" EntitySet="Hajjis" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Hajji" Association="DagorHajjModel.FK_Contract_Hajji">
+            <End Role="Hajji" EntitySet="Hajjis" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gl_HajjiGroupLeaderId" Association="DagorHajjModel.fk_Gl_HajjiGroupLeaderId">
+            <End Role="GroupLeader" EntitySet="GroupLeaders" />
+            <End Role="Hajji" EntitySet="Hajjis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hajji_MuharramRelationId" Association="DagorHajjModel.FK_Hajji_MuharramRelationId">
+            <End Role="MuharramRelation" EntitySet="MuharramRelations" />
+            <End Role="Hajji" EntitySet="Hajjis" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Hajji_Status" Association="DagorHajjModel.fk_Hajji_Status">
+            <End Role="HajjiStatu" EntitySet="HajjiStatus" />
+            <End Role="Hajji" EntitySet="Hajjis" />
+          </AssociationSet>
+          <EntitySet Name="SupplierPayments" EntityType="DagorHajjModel.SupplierPayment" />
+          <AssociationSet Name="FK_SupplierPayment_Supplier" Association="DagorHajjModel.FK_SupplierPayment_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="SupplierPayment" EntitySet="SupplierPayments" />
+          </AssociationSet>
+          <EntitySet Name="Payments" EntityType="DagorHajjModel.Payment" />
+          <AssociationSet Name="FK_Payment_GroupLeader" Association="DagorHajjModel.FK_Payment_GroupLeader">
+            <End Role="GroupLeader" EntitySet="GroupLeaders" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Hajji" Association="DagorHajjModel.FK_Payment_Hajji">
+            <End Role="Hajji" EntitySet="Hajjis" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_Ticket" Association="DagorHajjModel.FK_Other_Ticket">
+            <End Role="Other" EntitySet="Other" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Ticket" Association="DagorHajjModel.FK_Payment_Ticket">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <EntitySet Name="Umrahs" EntityType="DagorHajjModel.Umrah" />
+          <AssociationSet Name="fk_BookingUmrahId" Association="DagorHajjModel.fk_BookingUmrahId">
+            <End Role="Umrah" EntitySet="Umrahs" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Gl_UmrahGroupLeaderId" Association="DagorHajjModel.fk_Gl_UmrahGroupLeaderId">
+            <End Role="GroupLeader" EntitySet="GroupLeaders" />
+            <End Role="Umrah" EntitySet="Umrahs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Umrah_MuharramRelationId" Association="DagorHajjModel.FK_Umrah_MuharramRelationId">
+            <End Role="MuharramRelation" EntitySet="MuharramRelations" />
+            <End Role="Umrah" EntitySet="Umrahs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PaymentUmrahId" Association="DagorHajjModel.fk_PaymentUmrahId">
+            <End Role="Umrah" EntitySet="Umrahs" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Umrah_UmrahStatus" Association="DagorHajjModel.fk_Umrah_UmrahStatus">
+            <End Role="UmrahStatu" EntitySet="UmrahStatus" />
+            <End Role="Umrah" EntitySet="Umrahs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Hajji">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HajjID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoB" Type="DateTime" Precision="3" />
+          <Property Name="PlaceOfBirth" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MotherName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SpouseName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PresentAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SpouseContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TrackingNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PassportExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="PassportIssueDate" Type="DateTime" Precision="3" />
+          <Property Name="PlaceOfPassportIssue" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassportAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NIDAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ImageAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="PID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InitialName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmergencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmergencyContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupLeaderID" Type="Int32" />
+          <Property Name="ContractAmount" Type="Int32" />
+          <Property Name="PerformingHajj" Type="Int32" />
+          <Property Name="MuharramName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LastHajjYear" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Thana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostOffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MuharramRelationID" Type="Int32" />
+          <Property Name="PermanentDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentThana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentPostOffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentPostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bookings" Relationship="DagorHajjModel.fk_BookingHajjiID" FromRole="Hajji" ToRole="Booking" />
+          <NavigationProperty Name="Contracts" Relationship="DagorHajjModel.FK_Contract_Hajji" FromRole="Hajji" ToRole="Contract" />
+          <NavigationProperty Name="GroupLeader" Relationship="DagorHajjModel.fk_Gl_HajjiGroupLeaderId" FromRole="Hajji" ToRole="GroupLeader" />
+          <NavigationProperty Name="MuharramRelation" Relationship="DagorHajjModel.FK_Hajji_MuharramRelationId" FromRole="Hajji" ToRole="MuharramRelation" />
+          <NavigationProperty Name="HajjiStatu" Relationship="DagorHajjModel.fk_Hajji_Status" FromRole="Hajji" ToRole="HajjiStatu" />
+          <NavigationProperty Name="Payments" Relationship="DagorHajjModel.FK_Payment_Hajji" FromRole="Hajji" ToRole="Payment" />
+        </EntityType>
+        <Association Name="fk_BookingHajjiID">
+          <End Type="DagorHajjModel.Hajji" Role="Hajji" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hajji">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="HajjiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Hajji">
+          <End Type="DagorHajjModel.Hajji" Role="Hajji" Multiplicity="1" />
+          <End Type="DagorHajjModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hajji">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="HajjiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Gl_HajjiGroupLeaderId">
+          <End Type="DagorHajjModel.GroupLeader" Role="GroupLeader" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Hajji" Role="Hajji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Hajji">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hajji_MuharramRelationId">
+          <End Type="DagorHajjModel.MuharramRelation" Role="MuharramRelation" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Hajji" Role="Hajji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MuharramRelation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Hajji">
+              <PropertyRef Name="MuharramRelationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Hajji_Status">
+          <End Type="DagorHajjModel.HajjiStatu" Role="HajjiStatu" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Hajji" Role="Hajji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HajjiStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Hajji">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SupplierPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="ChequeNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeDate" Type="DateTime" Precision="3" />
+          <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Branch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentFor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusChangableDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Supplier" Relationship="DagorHajjModel.FK_SupplierPayment_Supplier" FromRole="SupplierPayment" ToRole="Supplier" />
+        </EntityType>
+        <Association Name="FK_SupplierPayment_Supplier">
+          <End Type="DagorHajjModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="DagorHajjModel.SupplierPayment" Role="SupplierPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupplierPayment">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupLeaderID" Type="Int32" Nullable="false" />
+          <Property Name="HajjiID" Type="Int32" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="ChequeNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeDate" Type="DateTime" Precision="3" />
+          <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Branch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UmrahID" Type="Int32" />
+          <Property Name="PaymentFor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusChangableDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TicketId" Type="Int32" />
+          <Property Name="OtherId" Type="Int32" />
+          <NavigationProperty Name="GroupLeader" Relationship="DagorHajjModel.FK_Payment_GroupLeader" FromRole="Payment" ToRole="GroupLeader" />
+          <NavigationProperty Name="Hajji" Relationship="DagorHajjModel.FK_Payment_Hajji" FromRole="Payment" ToRole="Hajji" />
+          <NavigationProperty Name="Other" Relationship="DagorHajjModel.FK_Other_Ticket" FromRole="Payment" ToRole="Other" />
+          <NavigationProperty Name="Ticket" Relationship="DagorHajjModel.FK_Payment_Ticket" FromRole="Payment" ToRole="Ticket" />
+          <NavigationProperty Name="Umrah" Relationship="DagorHajjModel.fk_PaymentUmrahId" FromRole="Payment" ToRole="Umrah" />
+        </EntityType>
+        <Association Name="FK_Payment_GroupLeader">
+          <End Type="DagorHajjModel.GroupLeader" Role="GroupLeader" Multiplicity="1" />
+          <End Type="DagorHajjModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Hajji">
+          <End Type="DagorHajjModel.Hajji" Role="Hajji" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hajji">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="HajjiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_Ticket">
+          <End Type="DagorHajjModel.Other" Role="Other" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Other">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="OtherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Ticket">
+          <End Type="DagorHajjModel.Ticket" Role="Ticket" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Umrah">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UmrahID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoB" Type="DateTime" Precision="3" />
+          <Property Name="PlaceOfBirth" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MotherName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SpouseName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PresentAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SpouseContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PassportExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="PassportIssueDate" Type="DateTime" Precision="3" />
+          <Property Name="PlaceOfPassportIssue" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassportAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NIDAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ImageAttach" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="MuharramName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="InitialName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupLeaderID" Type="Int32" />
+          <Property Name="LastUmrahYear" Type="Int32" />
+          <Property Name="ContractAmount" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Thana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostOffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DepartureDate" Type="DateTime" Precision="3" />
+          <Property Name="FlightArrivalDate" Type="DateTime" Precision="3" />
+          <Property Name="MuharramRelationID" Type="Int32" />
+          <Property Name="PermanentDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentThana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentPostOffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentPostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="PurchaseAmount" Type="Int32" />
+          <NavigationProperty Name="Bookings" Relationship="DagorHajjModel.fk_BookingUmrahId" FromRole="Umrah" ToRole="Booking" />
+          <NavigationProperty Name="GroupLeader" Relationship="DagorHajjModel.fk_Gl_UmrahGroupLeaderId" FromRole="Umrah" ToRole="GroupLeader" />
+          <NavigationProperty Name="MuharramRelation" Relationship="DagorHajjModel.FK_Umrah_MuharramRelationId" FromRole="Umrah" ToRole="MuharramRelation" />
+          <NavigationProperty Name="Payments" Relationship="DagorHajjModel.fk_PaymentUmrahId" FromRole="Umrah" ToRole="Payment" />
+          <NavigationProperty Name="UmrahStatu" Relationship="DagorHajjModel.fk_Umrah_UmrahStatus" FromRole="Umrah" ToRole="UmrahStatu" />
+        </EntityType>
+        <Association Name="fk_BookingUmrahId">
+          <End Type="DagorHajjModel.Umrah" Role="Umrah" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Umrah">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="UmrahID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Gl_UmrahGroupLeaderId">
+          <End Type="DagorHajjModel.GroupLeader" Role="GroupLeader" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Umrah" Role="Umrah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupLeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Umrah">
+              <PropertyRef Name="GroupLeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Umrah_MuharramRelationId">
+          <End Type="DagorHajjModel.MuharramRelation" Role="MuharramRelation" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Umrah" Role="Umrah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MuharramRelation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Umrah">
+              <PropertyRef Name="MuharramRelationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PaymentUmrahId">
+          <End Type="DagorHajjModel.Umrah" Role="Umrah" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Umrah">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UmrahID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Umrah_UmrahStatus">
+          <End Type="DagorHajjModel.UmrahStatu" Role="UmrahStatu" Multiplicity="0..1" />
+          <End Type="DagorHajjModel.Umrah" Role="Umrah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UmrahStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Umrah">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DagorHajjModelStoreContainer" CdmEntityContainer="DagorHajjEntities">
+          <EntitySetMapping Name="AdminSystemUsers">
+            <EntityTypeMapping TypeName="DagorHajjModel.AdminSystemUser">
+              <MappingFragment StoreEntitySet="AdminSystemUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="AllModule" ColumnName="AllModule" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminSystemUserDetails">
+            <EntityTypeMapping TypeName="DagorHajjModel.AdminSystemUserDetail">
+              <MappingFragment StoreEntitySet="AdminSystemUserDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AdminSystemUserId" ColumnName="AdminSystemUserId" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleStatus" ColumnName="ModuleStatus" />
+                <ScalarProperty Name="Menu" ColumnName="Menu" />
+                <ScalarProperty Name="Create" ColumnName="Create" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="Delete" ColumnName="Delete" />
+                <ScalarProperty Name="ListView" ColumnName="ListView" />
+                <ScalarProperty Name="ReportPreview" ColumnName="ReportPreview" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="DagorHajjModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HajjYear" ColumnName="HajjYear" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="UmrahID" ColumnName="UmrahID" />
+                <ScalarProperty Name="PaymentFor" ColumnName="PaymentFor" />
+                <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="HajjiID" ColumnName="HajjiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyProfiles">
+            <EntityTypeMapping TypeName="DagorHajjModel.CompanyProfile">
+              <MappingFragment StoreEntitySet="CompanyProfile">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConpanyName" ColumnName="ConpanyName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OwnersName" ColumnName="OwnersName" />
+                <ScalarProperty Name="OwnersContactNo" ColumnName="OwnersContactNo" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="DagorHajjModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HajjiID" ColumnName="HajjiID" />
+                <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+                <ScalarProperty Name="ContractAmount" ColumnName="ContractAmount" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupLeaders">
+            <EntityTypeMapping TypeName="DagorHajjModel.GroupLeader">
+              <MappingFragment StoreEntitySet="GroupLeader">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="NID" ColumnName="NID" />
+                <ScalarProperty Name="PassportAttach" ColumnName="PassportAttach" />
+                <ScalarProperty Name="NIDAttach" ColumnName="NIDAttach" />
+                <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Thana" ColumnName="Thana" />
+                <ScalarProperty Name="PostOffice" ColumnName="PostOffice" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactNoKSA" ColumnName="ContactNoKSA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HajjiStatus">
+            <EntityTypeMapping TypeName="DagorHajjModel.HajjiStatu">
+              <MappingFragment StoreEntitySet="HajjiStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MuharramRelations">
+            <EntityTypeMapping TypeName="DagorHajjModel.MuharramRelation">
+              <MappingFragment StoreEntitySet="MuharramRelation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RelationType" ColumnName="RelationType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Other">
+            <EntityTypeMapping TypeName="DagorHajjModel.Other">
+              <MappingFragment StoreEntitySet="Other">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+                <ScalarProperty Name="InitialName" ColumnName="InitialName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="PurchaseRate" ColumnName="PurchaseRate" />
+                <ScalarProperty Name="SellingRate" ColumnName="SellingRate" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="DateOfExpiry" ColumnName="DateOfExpiry" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SellTo" ColumnName="SellTo" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DagorHajjModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="DagorHajjModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="PackageRate" ColumnName="PackageRate" />
+                <ScalarProperty Name="HajjLevy" ColumnName="HajjLevy" />
+                <ScalarProperty Name="LevyYear" ColumnName="LevyYear" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="EditedAt" ColumnName="EditedAt" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="DagorHajjModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="PermanenttAddress" ColumnName="PermanenttAddress" />
+                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedAt" ColumnName="EditedAt" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="DagorHajjModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="FlightDate" ColumnName="FlightDate" />
+                <ScalarProperty Name="Carier" ColumnName="Carier" />
+                <ScalarProperty Name="FlightNo" ColumnName="FlightNo" />
+                <ScalarProperty Name="TicketNo" ColumnName="TicketNo" />
+                <ScalarProperty Name="AirlinesPNR" ColumnName="AirlinesPNR" />
+                <ScalarProperty Name="GdsPNR" ColumnName="GdsPNR" />
+                <ScalarProperty Name="InitialName" ColumnName="InitialName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PurchaseRate" ColumnName="PurchaseRate" />
+                <ScalarProperty Name="SellingRate" ColumnName="SellingRate" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="DateOfExpiry" ColumnName="DateOfExpiry" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SellTo" ColumnName="SellTo" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketSectors">
+            <EntityTypeMapping TypeName="DagorHajjModel.TicketSector">
+              <MappingFragment StoreEntitySet="TicketSector">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionTypes">
+            <EntityTypeMapping TypeName="DagorHajjModel.TransactionType">
+              <MappingFragment StoreEntitySet="TransactionType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UmrahStatus">
+            <EntityTypeMapping TypeName="DagorHajjModel.UmrahStatu">
+              <MappingFragment StoreEntitySet="UmrahStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DagorHajjModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastLoggedInDateTime" ColumnName="LastLoggedInDateTime" />
+                <ScalarProperty Name="AllowedNoOfLogins" ColumnName="AllowedNoOfLogins" />
+                <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
+                <ScalarProperty Name="AllowedLoginHours" ColumnName="AllowedLoginHours" />
+                <ScalarProperty Name="AllowedLoginMinutes" ColumnName="AllowedLoginMinutes" />
+                <ScalarProperty Name="ActiveBranchId" ColumnName="ActiveBranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hajjis">
+            <EntityTypeMapping TypeName="DagorHajjModel.Hajji">
+              <MappingFragment StoreEntitySet="Hajji">
+                <ScalarProperty Name="PermanentPostCode" ColumnName="PermanentPostCode" />
+                <ScalarProperty Name="PermanentPostOffice" ColumnName="PermanentPostOffice" />
+                <ScalarProperty Name="PermanentThana" ColumnName="PermanentThana" />
+                <ScalarProperty Name="PermanentDistrict" ColumnName="PermanentDistrict" />
+                <ScalarProperty Name="MuharramRelationID" ColumnName="MuharramRelationID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="PostOffice" ColumnName="PostOffice" />
+                <ScalarProperty Name="Thana" ColumnName="Thana" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastHajjYear" ColumnName="LastHajjYear" />
+                <ScalarProperty Name="MuharramName" ColumnName="MuharramName" />
+                <ScalarProperty Name="PerformingHajj" ColumnName="PerformingHajj" />
+                <ScalarProperty Name="ContractAmount" ColumnName="ContractAmount" />
+                <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+                <ScalarProperty Name="EmergencyContactNo" ColumnName="EmergencyContactNo" />
+                <ScalarProperty Name="EmergencyName" ColumnName="EmergencyName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="InitialName" ColumnName="InitialName" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
+                <ScalarProperty Name="NIDAttach" ColumnName="NIDAttach" />
+                <ScalarProperty Name="PassportAttach" ColumnName="PassportAttach" />
+                <ScalarProperty Name="NID" ColumnName="NID" />
+                <ScalarProperty Name="PlaceOfPassportIssue" ColumnName="PlaceOfPassportIssue" />
+                <ScalarProperty Name="PassportIssueDate" ColumnName="PassportIssueDate" />
+                <ScalarProperty Name="PassportExpiryDate" ColumnName="PassportExpiryDate" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="TrackingNo" ColumnName="TrackingNo" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="SpouseContactNo" ColumnName="SpouseContactNo" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+                <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="HajjID" ColumnName="HajjID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierPayments">
+            <EntityTypeMapping TypeName="DagorHajjModel.SupplierPayment">
+              <MappingFragment StoreEntitySet="SupplierPayment">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="StatusChangableDate" ColumnName="StatusChangableDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PaymentFor" ColumnName="PaymentFor" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+                <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="DagorHajjModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="OtherId" ColumnName="OtherId" />
+                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="StatusChangableDate" ColumnName="StatusChangableDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PaymentFor" ColumnName="PaymentFor" />
+                <ScalarProperty Name="UmrahID" ColumnName="UmrahID" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+                <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="HajjiID" ColumnName="HajjiID" />
+                <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Umrahs">
+            <EntityTypeMapping TypeName="DagorHajjModel.Umrah">
+              <MappingFragment StoreEntitySet="Umrah">
+                <ScalarProperty Name="PurchaseAmount" ColumnName="PurchaseAmount" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="PermanentPostCode" ColumnName="PermanentPostCode" />
+                <ScalarProperty Name="PermanentPostOffice" ColumnName="PermanentPostOffice" />
+                <ScalarProperty Name="PermanentThana" ColumnName="PermanentThana" />
+                <ScalarProperty Name="PermanentDistrict" ColumnName="PermanentDistrict" />
+                <ScalarProperty Name="MuharramRelationID" ColumnName="MuharramRelationID" />
+                <ScalarProperty Name="FlightArrivalDate" ColumnName="FlightArrivalDate" />
+                <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="PostOffice" ColumnName="PostOffice" />
+                <ScalarProperty Name="Thana" ColumnName="Thana" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ContractAmount" ColumnName="ContractAmount" />
+                <ScalarProperty Name="LastUmrahYear" ColumnName="LastUmrahYear" />
+                <ScalarProperty Name="GroupLeaderID" ColumnName="GroupLeaderID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="InitialName" ColumnName="InitialName" />
+                <ScalarProperty Name="MuharramName" ColumnName="MuharramName" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
+                <ScalarProperty Name="NIDAttach" ColumnName="NIDAttach" />
+                <ScalarProperty Name="PassportAttach" ColumnName="PassportAttach" />
+                <ScalarProperty Name="NID" ColumnName="NID" />
+                <ScalarProperty Name="PlaceOfPassportIssue" ColumnName="PlaceOfPassportIssue" />
+                <ScalarProperty Name="PassportIssueDate" ColumnName="PassportIssueDate" />
+                <ScalarProperty Name="PassportExpiryDate" ColumnName="PassportExpiryDate" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="SpouseContactNo" ColumnName="SpouseContactNo" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+                <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="UmrahID" ColumnName="UmrahID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

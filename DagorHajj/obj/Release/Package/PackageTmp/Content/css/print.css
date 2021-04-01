@@ -1,0 +1,9 @@
+﻿@media print {    
+    .no-print, .no-print *, .pace-activity {
+        display: none !important;
+    }
+    .inner-report{
+        display: block;
+    }
+}
+	

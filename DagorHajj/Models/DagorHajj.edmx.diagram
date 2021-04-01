@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae379567257c4b648f603abf0d122ed9" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="DagorHajjModel.AdminSystemUser" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.AdminSystemUserDetail" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.Booking" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.CompanyProfile" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.Contract" Width="1.5" PointX="6" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.GroupLeader" Width="1.5" PointX="0.75" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.HajjiStatu" Width="1.5" PointX="6.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.MuharramRelation" Width="1.5" PointX="6.75" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.Other" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.Role" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.Setting" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.Supplier" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.Ticket" Width="1.5" PointX="6" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.TicketSector" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.TransactionType" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.UmrahStatu" Width="1.5" PointX="3.75" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DagorHajjModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="DagorHajjModel.FK_AdminSystemUserDetails_AdminSystemUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DagorHajjModel.fk_BookingGroupLeaderId" ManuallyRouted="false" />
+        <AssociationConnector Association="DagorHajjModel.FK_Contract_GroupLeader" ManuallyRouted="false" />
+        <AssociationConnector Association="DagorHajjModel.fk_Gl_groupLeaderID" ManuallyRouted="false" />
+        <AssociationConnector Association="DagorHajjModel.FK_Other_GroupLeaderId" ManuallyRouted="false" />
+        <AssociationConnector Association="DagorHajjModel.FK_Other_SupplierID" ManuallyRouted="false" />
+        <AssociationConnector Association="DagorHajjModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="DagorHajjModel.FK_Ticket_SupplierID" ManuallyRouted="false" />
+        <AssociationConnector Association="DagorHajjModel.FK_TicketSector_TicketID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DagorHajjModel.Hajji" Width="1.5" PointX="9" PointY="21.625" />
+        <AssociationConnector Association="DagorHajjModel.fk_BookingHajjiID" />
+        <AssociationConnector Association="DagorHajjModel.FK_Contract_Hajji" />
+        <AssociationConnector Association="DagorHajjModel.fk_Gl_HajjiGroupLeaderId" />
+        <AssociationConnector Association="DagorHajjModel.FK_Hajji_MuharramRelationId" />
+        <AssociationConnector Association="DagorHajjModel.fk_Hajji_Status" />
+        <EntityTypeShape EntityType="DagorHajjModel.SupplierPayment" Width="1.5" PointX="6" PointY="28.125" />
+        <AssociationConnector Association="DagorHajjModel.FK_SupplierPayment_Supplier" />
+        <EntityTypeShape EntityType="DagorHajjModel.Payment" Width="1.5" PointX="16.25" PointY="23.5" />
+        <AssociationConnector Association="DagorHajjModel.FK_Payment_GroupLeader" />
+        <AssociationConnector Association="DagorHajjModel.FK_Payment_Hajji" />
+        <AssociationConnector Association="DagorHajjModel.FK_Other_Ticket" />
+        <AssociationConnector Association="DagorHajjModel.FK_Payment_Ticket" />
+        <EntityTypeShape EntityType="DagorHajjModel.Umrah" Width="1.5" PointX="12" PointY="26.375" />
+        <AssociationConnector Association="DagorHajjModel.fk_BookingUmrahId" />
+        <AssociationConnector Association="DagorHajjModel.fk_Gl_UmrahGroupLeaderId" />
+        <AssociationConnector Association="DagorHajjModel.FK_Umrah_MuharramRelationId" />
+        <AssociationConnector Association="DagorHajjModel.fk_PaymentUmrahId" />
+        <AssociationConnector Association="DagorHajjModel.fk_Umrah_UmrahStatus" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
